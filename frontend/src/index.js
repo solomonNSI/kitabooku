@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./Views/AppView/App";
 import Login from "./Views/LoginView/Login";
 import SignUp from "./Views/SignUpView/SignUp";
+import Feed from "./Views/FeedView/Feed";
 
 export default function Root() {
   return (
@@ -12,7 +13,8 @@ export default function Root() {
       <Routes>
         <Route index path="/" element={<App />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<Login />} />,
+        <Route path="feed" element={<Feed />} />
       </Routes>
     </BrowserRouter>
   );
