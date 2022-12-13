@@ -6,7 +6,7 @@ export const Container = styled.div`
   height: 100%;
   top: 0px;
   left: 0px;
-  width: 300px;
+  width: 250px;
   left: ${props => props.sidebar ? '0' : '-100%'};
   
 
@@ -25,4 +25,12 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   margin-top: 100px;
+`;
+
+export const Title = styled.div`
+  font-size: 36px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  color: white;
 `;

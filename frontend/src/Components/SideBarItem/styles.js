@@ -16,6 +16,6 @@ export const Container = styled.div`
   }
 
   &:hover {
-    background-color: black;
+    background-color: grey;
   }
 `;

@@ -7,7 +7,6 @@ const Header = () => {
   return (
     <Container>
       <FaBell/>
-      {<SideBar active={true} />}
     </Container>
   )
 }

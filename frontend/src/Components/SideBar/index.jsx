@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Content } from './styles'
+import { Container, Content, Title } from './styles'
 import { 
   FaHome, 
   FaRegSun, 
@@ -17,6 +17,7 @@ const SideBar = ({ active }) => {
     <Container sidebar={active}>
       
       <Content>
+        <Title>Discover</Title>
         <SideBarItem Icon={FaHome} Text="Feed" />
         <SideBarItem Icon={FaList} Text="Lists" />
         <SideBarItem Icon={FaChartBar} Text="Leaderboard" />
