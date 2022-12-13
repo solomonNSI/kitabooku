@@ -19,7 +19,7 @@ const Login = () => {
           <input type="email" placeholder="E-Mail"></input>
           <input type="password" placeholder="Password"></input>
 
-          <button className="loginButton">Login</button>
+          <button className="loginButton" onClick={() => navigate("/feed")}>Login</button>
           <button className="signUpButton" onClick={() => navigate("/signup")}>
             Don't have an account? <strong>Sign Up {">"}</strong>
           </button>
