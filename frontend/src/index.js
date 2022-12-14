@@ -6,6 +6,7 @@ import App from "./Views/AppView/App";
 import Login from "./Views/LoginView/Login";
 import SignUp from "./Views/SignUpView/SignUp";
 import Feed from "./Views/FeedView/Feed";
+import Profile from "./Views/ProfileView/Profile";
 
 export default function Root() {
   return (
@@ -14,7 +15,8 @@ export default function Root() {
         <Route index path="/" element={<App />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<Login />} />,
-        <Route path="feed" element={<Feed />} />
+        <Route path="feed" element={<Feed />} />,
+        <Route path="profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

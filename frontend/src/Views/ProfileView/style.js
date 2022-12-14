@@ -178,34 +178,5 @@ export const CardBookAuthor = styled.div`
   margin: 0px 12px;
 `;
 
-export const ProfileButton = styled.div`  
-  display: flex;
-  background-color: #1A202C; 
-  font-size: 20px;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 10px;
-  margin: auto 0px;
-  width: 30px;
-  height: 30px;
-
-  &:hover {
-    background-color: grey;
-  }
-`;
-
-export const SearchBar = styled.div`
-  display: flex;
-  background-color: #1A202C; 
-  font-size: 20px;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 10px;
-  margin: auto 0px;
-  width: 500px;
-  height: 20px;
-`;
 
 
