@@ -10,11 +10,11 @@ import {
 const Feed = () => {
   const navigate = useNavigate();
   return (
-    
+   
     <div
       style={{
         backgroundColor: "#eeeeee",
-        height: "200vh",
+        height: "auto",
         display: "flex",
         justifyContent: "center",
       }}
@@ -31,49 +31,53 @@ const Feed = () => {
             <S.FilterButton>Quotes</S.FilterButton>
           </S.Container>
           <S.Title>Feed</S.Title>
+
           <S.Card>
             <S.CardUsername>@hagridlover</S.CardUsername>
-            <S.CardRating>5/5 Points</S.CardRating>
-            <S.CardReviewTitle>Amazing!!!</S.CardReviewTitle>
-            <S.CardReview>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus vulputate sapien. Sed sodales est erat, sit amet euismod dolor cursus sit amet. In vitae eleifend mi, ut congue ex. Nullam vitae turpis eu massa auctor dignissim non sit amet diam. Maecenas placerat est et convallis consequat.</S.CardReview>
-            
-            <S.CardBookContainer> 
-              <FaBook/>  
-              <S.CardBookNameAuthor>
-                <S.CardBookName>Harry Potter and the Philosopher’s Stone</S.CardBookName>
-                <S.CardBookAuthor>J. K. Rowling</S.CardBookAuthor>
-              </S.CardBookNameAuthor>
-            </S.CardBookContainer>
+            <S.CardIn>
+              <S.CardRating>5/5 Points</S.CardRating>
+              <S.CardReviewTitle>Amazing!!!</S.CardReviewTitle>
+              <S.CardReview>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus vulputate sapien. Sed sodales est erat, sit amet euismod dolor cursus sit amet. In vitae eleifend mi, ut congue ex. Nullam vitae turpis eu massa auctor dignissim non sit amet diam. Maecenas placerat est et convallis consequat.</S.CardReview>
+              <S.CardBookContainer> 
+                <FaBook/>  
+                <S.CardBookNameAuthor>
+                  <S.CardBookName>Harry Potter and the Philosopher’s Stone</S.CardBookName>
+                  <S.CardBookAuthor>J. K. Rowling</S.CardBookAuthor>
+                </S.CardBookNameAuthor>
+              </S.CardBookContainer>
+            </S.CardIn>
           </S.Card>
 
           <S.Card>
             <S.CardUsername>@hagridlover</S.CardUsername>
-            <S.CardRating>5/5 Points</S.CardRating>
-            <S.CardReviewTitle>Amazing!!!</S.CardReviewTitle>
-            <S.CardReview>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus vulputate sapien. Sed sodales est erat, sit amet euismod dolor cursus sit amet. In vitae eleifend mi, ut congue ex. Nullam vitae turpis eu massa auctor dignissim non sit amet diam. Maecenas placerat est et convallis consequat.</S.CardReview>
-            
-            <S.CardBookContainer> 
-              <FaBook/>  
-              <S.CardBookNameAuthor>
-                <S.CardBookName>Harry Potter and the Philosopher’s Stone</S.CardBookName>
-                <S.CardBookAuthor>J. K. Rowling</S.CardBookAuthor>
-              </S.CardBookNameAuthor>
-            </S.CardBookContainer>
+            <S.CardIn>
+              <S.CardRating>5/5 Points</S.CardRating>
+              <S.CardReviewTitle>Amazing!!!</S.CardReviewTitle>
+              <S.CardReview>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus vulputate sapien. Sed sodales est erat, sit amet euismod dolor cursus sit amet. In vitae eleifend mi, ut congue ex. Nullam vitae turpis eu massa auctor dignissim non sit amet diam. Maecenas placerat est et convallis consequat.</S.CardReview>
+              <S.CardBookContainer> 
+                <FaBook/>  
+                <S.CardBookNameAuthor>
+                  <S.CardBookName>Harry Potter and the Philosopher’s Stone</S.CardBookName>
+                  <S.CardBookAuthor>J. K. Rowling</S.CardBookAuthor>
+                </S.CardBookNameAuthor>
+              </S.CardBookContainer>
+            </S.CardIn>
           </S.Card>
 
           <S.Card>
             <S.CardUsername>@hagridlover</S.CardUsername>
-            <S.CardRating>5/5 Points</S.CardRating>
-            <S.CardReviewTitle>Amazing!!!</S.CardReviewTitle>
-            <S.CardReview>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus vulputate sapien. Sed sodales est erat, sit amet euismod dolor cursus sit amet. In vitae eleifend mi, ut congue ex. Nullam vitae turpis eu massa auctor dignissim non sit amet diam. Maecenas placerat est et convallis consequat.</S.CardReview>
-            
-            <S.CardBookContainer> 
-              <FaBook/>  
-              <S.CardBookNameAuthor>
-                <S.CardBookName>Harry Potter and the Philosopher’s Stone</S.CardBookName>
-                <S.CardBookAuthor>J. K. Rowling</S.CardBookAuthor>
-              </S.CardBookNameAuthor>
-            </S.CardBookContainer>
+            <S.CardIn>
+              <S.CardRating>5/5 Points</S.CardRating>
+              <S.CardReviewTitle>Amazing!!!</S.CardReviewTitle>
+              <S.CardReview>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus vulputate sapien. Sed sodales est erat, sit amet euismod dolor cursus sit amet. In vitae eleifend mi, ut congue ex. Nullam vitae turpis eu massa auctor dignissim non sit amet diam. Maecenas placerat est et convallis consequat.</S.CardReview>
+              <S.CardBookContainer> 
+                <FaBook/>  
+                <S.CardBookNameAuthor>
+                  <S.CardBookName>Harry Potter and the Philosopher’s Stone</S.CardBookName>
+                  <S.CardBookAuthor>J. K. Rowling</S.CardBookAuthor>
+                </S.CardBookNameAuthor>
+              </S.CardBookContainer>
+            </S.CardIn>
           </S.Card>
           
         </S.FeedInside>

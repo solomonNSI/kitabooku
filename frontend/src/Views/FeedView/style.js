@@ -7,7 +7,7 @@ export const Background = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #dddddd;
-  margin-top: 150px;
+  margin: 150px 0px;
   height: auto;
 `;
 
@@ -78,12 +78,23 @@ export const Card = styled.div`
   flex-direction: column;
 `;
 
+export const CardIn = styled.div`  
+  display: inline-flex;
+  background-color: #a1a4a8;
+  height: wrap;
+  width: 760px;
+  padding: 20px; 
+  border-radius: 8px;
+  justify-content: space-between;
+  flex-direction: column;
+`;
+
 export const CardUsername = styled.div`  
   display: inline-flex;
   background-color: #ededed;
   height: 20px;
   width: auto;
-  padding: 12px; 
+  padding: 12px 20px; 
   border-radius: 8px;
   justify-content: space-between;
   flex-direction: column;
@@ -95,7 +106,6 @@ export const CardRating = styled.div`
   background-color: #a1a4a8;
   height: 20px;
   width: auto;
-  margin: 8px 12px;
   border-radius: 8px;
   justify-content: space-between;
   flex-direction: column;
@@ -104,10 +114,9 @@ export const CardRating = styled.div`
 export const CardReviewTitle = styled.div`  
   display: inline-flex;
   background-color: #a1a4a8;
-  height: 20px;
   width: auto;
   font-size: 24px;
-  margin: 8px 12px;
+  margin: 5px 0px;
   
   justify-content: space-between;
   flex-direction: column;
@@ -119,8 +128,7 @@ export const CardReview = styled.div`
   height: auto;
   width: auto;
   font-size: 16px;
-  margin: 8px 12px;
-  
+
   justify-content: space-between;
   flex-direction: column;
 `;
@@ -131,16 +139,14 @@ export const CardBookContainer = styled.div`
   display: inline-flex;
   height: wrap;
   width: 800px;
-  margin: 10px 0px; 
   border-radius: 8px;
   justify-content: start;
   flex-direction: row;
-
+  margin-top: 20px;
   > svg {
     color: black;
     width: 40px;
     height: 40px;
-    margin-left: 12px;
     cursor: pointer;
   }
 `;
@@ -150,6 +156,7 @@ export const CardBookNameAuthor = styled.div`
   height: wrap;
   width: auto;
   border-radius: 8px;
+  padding-bottom: 10px;
   justify-content: start;
   flex-direction: column;
 `;
