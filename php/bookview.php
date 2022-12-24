@@ -82,7 +82,7 @@
             $bookData = mysqli_query($db, "SELECT * FROM book WHERE b_id ='" . $_SESSION['b_id'] . "'");
             $book = mysqli_fetch_array($bookData);
             echo "<div>" . "Publisher: " . $book['publisher'] . "</div>";
-            echo "<div>" . "Published: " $book['publish_year'] . "</div>";
+            echo "<div>" . "Published: " . $book['publish_year'] . "</div>";
             echo "<div>" . "Genre: " . $book['genre'] . "</div>";
             echo "<div>" . "Genre: " . $book['page_count'] . "</div>";
           }
