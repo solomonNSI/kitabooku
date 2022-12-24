@@ -6,6 +6,11 @@ import App from "./Views/AppView/App";
 import Login from "./Views/LoginView/Login";
 import SignUp from "./Views/SignUpView/SignUp";
 import Feed from "./Views/FeedView/Feed";
+import Lists from "./Views/ListsView/Lists";
+import Leaderboard from "./Views/LeaderboardView/Leaderboard";
+import BuyEbooks from "./Views/BuyEbooksView/BuyEbooks";
+import Forums from "./Views/ForumsView/Forums";
+import Settings from "./Views/SettingsView/Settings";
 
 export default function Root() {
   return (
@@ -15,6 +20,11 @@ export default function Root() {
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<Login />} />,
         <Route path="feed" element={<Feed />} />
+        <Route path="lists" element={<Lists />} />
+        <Route path="leaderboard" element={<Leaderboard />} />
+        <Route path="buy-ebooks" element={<BuyEbooks />} />
+        <Route path="forums" element={<Forums />} />
+        <Route path="settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
   );
