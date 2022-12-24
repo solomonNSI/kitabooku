@@ -11,6 +11,8 @@ import Leaderboard from "./Views/LeaderboardView/Leaderboard";
 import BuyEbooks from "./Views/BuyEbooksView/BuyEbooks";
 import Forums from "./Views/ForumsView/Forums";
 import Settings from "./Views/SettingsView/Settings";
+import Profile from "./Views/ProfileView/Profile";
+
 
 export default function Root() {
   return (
@@ -25,6 +27,8 @@ export default function Root() {
         <Route path="buy-ebooks" element={<BuyEbooks />} />
         <Route path="forums" element={<Forums />} />
         <Route path="settings" element={<Settings />} />
+        <Route path="feed" element={<Feed />} />,
+        <Route path="profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

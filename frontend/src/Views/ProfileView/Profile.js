@@ -6,7 +6,8 @@ import {
   FaBook,
 } from 'react-icons/fa'
 
-const Feed = () => {
+
+const Profile = () => {
   const navigate = useNavigate();
   return (
    
@@ -24,11 +25,10 @@ const Feed = () => {
       <S.Background>
         <S.FeedInside>
           
-                    
           <S.Container>
-            <S.SearchBar>Search</S.SearchBar>
-            <S.ProfileButton>profile</S.ProfileButton>
+            <S.FilterButton>Icon</S.FilterButton>
           </S.Container>
+
 
           <S.Container>
             <S.FilterButton>All</S.FilterButton>
@@ -91,4 +91,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default Profile;
