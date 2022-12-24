@@ -47,8 +47,7 @@
     <!-- Leaderboard table -->
     <table>
         <tr>
-            <th>Username</th>
-            <th>Score</th>
+            <th>Ebooks</th>
         </tr>
         <?php
             // Loop through the leaderboard array and output the data
