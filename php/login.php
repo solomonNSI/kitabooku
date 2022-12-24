@@ -17,10 +17,10 @@
         if($row == 1) {
             session_start();
             $user = mysqli_fetch_object($result);
-            $userID = $user->user_ID;
+            $u_id = $user->u_id;
             $userType = $user->user_type;
-            $_SESSION['userID'] = $userID;
-            $_SESSION['userType'] = $userType;
+            $_SESSION['u_id'] = $u_id;
+            $_SESSION['usertype'] = $usertype;
             header("location: home.php");
         }
         else {

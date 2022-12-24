@@ -3,7 +3,7 @@
 
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        $sql = $query = "SELECT * FROM ebook ORDER BY title DESC";
+        $sql = "SELECT * FROM ebook ORDER BY title DESC";
         $result = mysqli_query($db,$sql);
         while ($row = mysqli_fetch_array($result)) {
             $ebook[] = array('title' => $row['title'],
