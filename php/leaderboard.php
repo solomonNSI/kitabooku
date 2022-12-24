@@ -3,7 +3,7 @@
 
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        $sql = $query = "SELECT * FROM leaderboard ORDER BY score DESC LIMIT 3";
+        $sql = "SELECT * FROM leaderboard ORDER BY score DESC LIMIT 3";
         $result = mysqli_query($db,$sql);
         while ($row = mysqli_fetch_array($result)) {
             $leaderboard[] = array('username' => $row['username'], 'score' => $row['score']);
