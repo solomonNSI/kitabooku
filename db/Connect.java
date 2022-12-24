@@ -16,11 +16,11 @@ public class Connect{
     // Constants
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "gokberk!";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/kitabooku" + DB_USERNAME + "&password=" + DB_PASSWORD;  
-
+    //private static final String DB_URL = "jdbc:mysql://localhost:3306/kitabooku" + DB_USERNAME + "&password=" + DB_PASSWORD;  
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/kitabooku";
 
     public static void main(String[] args){
-        try (Connection connection = DriverManager.getConnection(DB_URL);
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
              Statement stmt = connection.createStatement()) {
             // Drop the tables if they already exist
             // (owns should be dropped first to ensure no error occurs due to foreign key constraints)
@@ -41,6 +41,7 @@ public class Connect{
 
             stmt.executeUpdate(
                 "CREATE TABLE Reader("+
+                    "username VARCHAR(255) NOT NULL,"+
                     "xp INT NOT NULL,"+
                     "status VARCHAR(320) NOT NULL,"+
                     "book_goal INT NOT NULL,"+
@@ -50,6 +51,7 @@ public class Connect{
 
             stmt.executeUpdate(
                 "CREATE TABLE AuthorUser(" +
+                    "username VARCHAR(255) NOT NULL,"+
                     "FOREIGN KEY (username) REFERENCES Reader(username)"+
                 ")ENGINE=INNODB;"
             );
