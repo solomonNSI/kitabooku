@@ -16,18 +16,18 @@ public class Connect{
     // Constants
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "gokberk!";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/kitabooku" + DB_USERNAME + "&password=" + DB_PASSWORD;  
-
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/kitabooku";
 
     public static void main(String[] args){
-        try (Connection connection = DriverManager.getConnection(DB_URL);
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
              Statement stmt = connection.createStatement()) {
             // Drop the tables if they already exist
-            // (owns should be dropped first to ensure no error occurs due to foreign key constraints)
-            stmt.executeUpdate("DROP TABLE IF EXISTS User;");
-            stmt.executeUpdate("DROP TABLE IF EXISTS Reader;");
+            // (AUTHORUSER, should be dropped first to ensure no error occurs due to foreign key constraints)
             stmt.executeUpdate("DROP TABLE IF EXISTS AuthorUser;");
+            // (READER AND ADMIN, should be dropped first to ensure no error occurs due to foreign key constraints)
+            stmt.executeUpdate("DROP TABLE IF EXISTS Reader;");
             stmt.executeUpdate("DROP TABLE IF EXISTS Admin;");
+            stmt.executeUpdate("DROP TABLE IF EXISTS User;");
 
             // Create the tables
             stmt.executeUpdate(
@@ -41,32 +41,50 @@ public class Connect{
 
             stmt.executeUpdate(
                 "CREATE TABLE Reader("+
+                    "username VARCHAR(255) NOT NULL,"+
                     "xp INT NOT NULL,"+
-                    "status VARCHAR(320) NOT NULL,"+
                     "book_goal INT NOT NULL,"+
+                    "status VARCHAR(320) NOT NULL,"+
                     "FOREIGN KEY (username) REFERENCES User(username)"+
                 ")ENGINE=INNODB;"
             );
 
             stmt.executeUpdate(
                 "CREATE TABLE AuthorUser(" +
+                    "username VARCHAR(255) NOT NULL,"+
                     "FOREIGN KEY (username) REFERENCES Reader(username)"+
                 ")ENGINE=INNODB;"
             );
 
             stmt.executeUpdate(
                 "CREATE TABLE Admin(" +
+                    "username VARCHAR(255) NOT NULL,"+
                     "FOREIGN KEY (username) REFERENCES User(username)"+
                 ") ENGINE=InnoDB;"
             );
 
             // Insert values
-            stmt.executeUpdate("INSERT INTO Reader VALUES ('gokiberk', 'gk@x.com', 'pass', '0', 'My Fav Quote', '0');");
-            stmt.executeUpdate("INSERT INTO AuthorUser VALUES ('sulo', 'sh@x.com', 'pass');");
-            stmt.executeUpdate("INSERT INTO Admin VALUES ('aydo', 'ay@x.com', 'pass');");
+            stmt.executeUpdate("INSERT INTO User VALUES ('gokiberk', 'gk@x.com', 'pass');");
+            stmt.executeUpdate("INSERT INTO Reader VALUES ('gokiberk', '0', '0', 'Goko Fav Quote');");
+
+            stmt.executeUpdate("INSERT INTO User VALUES ('shanab', 'ass@x.com', 'pass');");
+            stmt.executeUpdate("INSERT INTO Reader VALUES ('shanab', '0', '0', 'Ata Fav Quote');");
+
+            stmt.executeUpdate("INSERT INTO User VALUES ('sulo', 'sh@x.com', 'pass');");
+            stmt.executeUpdate("INSERT INTO Reader VALUES ('sulo', '0', '0', 'Sulo Fav Quote');");
+            stmt.executeUpdate("INSERT INTO AuthorUser VALUES ('sulo');");
+
+            stmt.executeUpdate("INSERT INTO User VALUES ('aydo', 'ay@x.com', 'pass');");
+            stmt.executeUpdate("INSERT INTO Admin VALUES ('aydo');");
 
 
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Reader;");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM User;");
+            try {
+                displayTable(rs);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            rs = stmt.executeQuery("SELECT * FROM Reader;");
             try {
                 displayTable(rs);
             } catch (SQLException ex) {
