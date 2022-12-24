@@ -53,8 +53,7 @@
     <!-- Leaderboard table -->
     <table>
         <tr>
-            <th>Username</th>
-            <th>Score</th>
+            <th>Authors Ebooks</th>
         </tr>
         <?php
             echo "<tr><td>" . $u_id;
