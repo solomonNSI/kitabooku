@@ -1,3 +1,7 @@
+<?php
+    include('config.php');
+    session_start();
+?>
 <html>
 <head>
     <title>Homepage</title>
@@ -28,7 +32,28 @@
                     $page = $_GET["page"];
 
                     if ($page == "feed") {
-                        include "homepage.php";
+                        // Connect to the database
+                        $userID = $_SESSION["userID"];
+                        // Check connection
+                        if (!$db) {
+                            die("Connection failed: " . mysqli_connect_error());
+                        }
+
+                        // Prepare the SQL query
+                        $sql = "SELECT * FROM Review";
+
+                        // Execute the query
+                        $result = mysqli_query($conn, $sql);
+
+                        // Check if the query was successful
+                        if (mysqli_num_rows($result) > 0) {
+                            // Output the data
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<p>" . $row["review"] . "</p>";
+                            }
+                        } else {
+                            echo "No reviews found.";
+                        }
                     } elseif ($page == "lists") {
                         include "lists.php";
                     } elseif ($page == "leaderboard") {
@@ -43,34 +68,6 @@
                 }
             ?>
         </div>
-        <?php
-            // Connect to the database
-            include('config.php');
-            session_start();
-            $userID = $_SESSION["userID"];
-            $conn = mysqli_connect($host, $username, $password, $dbname);
-
-            // Check connection
-            if (!$conn) {
-                die("Connection failed: " . mysqli_connect_error());
-            }
-
-            // Prepare the SQL query
-            $sql = "SELECT * FROM Review";
-
-            // Execute the query
-            $result = mysqli_query($conn, $sql);
-
-            // Check if the query was successful
-            if (mysqli_num_rows($result) > 0) {
-                // Output the data
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<p>" . $row["review"] . "</p>";
-                }
-            } else {
-                echo "No reviews found.";
-            }
-        ?>
     </div>
 </body>
 </html>
