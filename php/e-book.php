@@ -6,8 +6,11 @@
         $sql = $query = "SELECT * FROM ebook ORDER BY title DESC";
         $result = mysqli_query($db,$sql);
         while ($row = mysqli_fetch_array($result)) {
-            $ebook[] = array('title' => $row['title'], 'publisher' => $row['publisher'], 'publish_year' => $row['publish_year'], 'genre' => $row['genre'], 'price' => $row['price']);
-            echo "<tr><td>" . $row['username'] . "</td><td>" . $row['score'] . "</td></tr>";
+            $ebook[] = array('title' => $row['title'],
+                    'publisher' => $row['publisher'], 
+                    'publish_year' => $row['publish_year'],
+                    'genre' => $row['genre'],
+                    'price' => $row['price']);
         }
     }
     ?>
@@ -49,8 +52,9 @@
         </tr>
         <?php
             // Loop through the leaderboard array and output the data
-            foreach ($leaderboard as $entry) {
-                echo "<tr><td>" . $entry['username'] . "</td><td>" . $entry['score'] . "</td></tr>";
+            foreach ($ebook as $entry) {
+            echo "<tr><td>" . $entry['title'] . "</td><td>" . $entry['publisher'] . "</td></tr>"
+                . $entry['publish_year'] . "</td></tr>" . $entry['genre'] . "</td></tr>" . $entry['price'];
             }
         ?>
     </table>
