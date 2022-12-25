@@ -33,6 +33,7 @@ public class Connect{
             stmt.executeUpdate("DROP TABLE IF EXISTS has_review;");
             stmt.executeUpdate("DROP TABLE IF EXISTS post;");
             stmt.executeUpdate("DROP TABLE IF EXISTS has_wallet;");
+            stmt.executeUpdate("DROP TABLE IF EXISTS purchase;");
             stmt.executeUpdate("DROP TABLE IF EXISTS publish;");
             stmt.executeUpdate("DROP TABLE IF EXISTS Wallet;");
             stmt.executeUpdate("DROP TABLE IF EXISTS read_book;");
@@ -147,6 +148,16 @@ public class Connect{
             );
 
             stmt.executeUpdate(
+                "CREATE TABLE purchase(" +
+                    "username    VARCHAR(255)," +
+                    "b_id    INT," +
+                    "PRIMARY KEY (username, b_id)," +
+                    "FOREIGN KEY (username) REFERENCES Reader(username) ON DELETE CASCADE," +
+                    "FOREIGN KEY (b_id) REFERENCES E_Book(b_id) ON DELETE CASCADE" +
+               ") ENGINE=InnoDB;"
+            );
+
+            stmt.executeUpdate(
                 "CREATE TABLE Wallet ("+
                     "w_id INT NOT NULL,"+
                     "balance INT NOT NULL,"+
@@ -253,6 +264,7 @@ public class Connect{
             stmt.executeUpdate("INSERT INTO has_wallet VALUES ('shanab', '3')");
 
             stmt.executeUpdate("INSERT INTO publish VALUES ('sulo', '10', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO purchase VALUES ('gokiberk', '10')");
 
 
             
@@ -317,6 +329,12 @@ public class Connect{
                 ex.printStackTrace();
             }
             rs = stmt.executeQuery("SELECT r.username, w.balance FROM Wallet w, has_wallet h, Reader r WHERE h.w_id = w.w_id AND h.username = r.username;");
+            try {
+                displayTable(rs);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            rs = stmt.executeQuery("SELECT username, title FROM purchase p, Book b WHERE p.b_id = b.b_id;");
             try {
                 displayTable(rs);
             } catch (SQLException ex) {
