@@ -40,7 +40,7 @@
                         FROM read_book NATURAL JOIN Reader
                         GROUP BY username 
                         ORDER BY num_books 
-                        DESC LIMIT 3";
+                        DESC";
         $result = mysqli_query($db, $sql);
         while ($row = $result->fetch_assoc()) {
             $leaderboard[] = $row;
