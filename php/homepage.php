@@ -48,13 +48,15 @@
                         $sql = "SELECT * FROM Review";
                         echo "<div> hey" . $username . " yes</div";
                         // Execute the query
-                        $result = mysqli_query($conn, $sql);
+                        $result = mysqli_query($db, $sql);
 
                         // Check if the query was successful
                         if (mysqli_num_rows($result) > 0) {
                             // Output the data
                             while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<p>" . $row["review"] . "</p>";
+                                foreach($row as $col){
+                                    echo "<p>" . $col . "</p>";
+                                }
                             }
                         } else {
                             echo "No reviews found.";
