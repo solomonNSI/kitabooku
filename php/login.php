@@ -10,7 +10,7 @@
     
     <div id='login'>
         <h1 class ="title">KITABOOKU</h1>
-        <form class="form" method='post' onsubmit='return validateForm();' action='log.php'>
+        <form class="form" method='post' action='log.php'>
         
         <input type='text' placeholder="Username" id='usernameInput' name='username' required>
         
