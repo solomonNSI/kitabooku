@@ -2,7 +2,9 @@
     require 'ConnectServer.class.php';
     $db = ConnectServer::connect();
     session_start();
-    $username = $_SESSION['userID'];
+    if (!empty($_SESSION)) {
+        $username = $_SESSION['userID'];
+    }
 ?>
 <html>
 <head>
@@ -44,7 +46,7 @@
 
                         // Prepare the SQL query
                         $sql = "SELECT * FROM Review";
-
+                        echo "<div> hey" . $username . " yes</div";
                         // Execute the query
                         $result = mysqli_query($conn, $sql);
 
