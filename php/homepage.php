@@ -44,7 +44,7 @@
                                 die("Connection failed: " . mysqli_connect_error());
                             }
                             // Prepare the SQL query
-                            $sql = "SELECT * FROM Review";
+                            $sql = "SELECT * FROM Review NATURAL JOIN has_review NATURAL JOIN Book";
                             // Execute the query
                             $result = mysqli_query($db, $sql);
 
@@ -54,6 +54,7 @@
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "<p> Review: " . $row['text'] . "</p>";
                                     echo "<p> Rating: " . $row['rating'] . "</p>";
+                                    echo "<p> Book:" . $row['title'] . "</p>";
                                     echo "<hr>";
                                 }
                             } else {
