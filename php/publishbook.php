@@ -14,16 +14,16 @@
         
         <label for="title">Title:</label><br>
         <input type="text" name="title" id="title"><br>
+        <label for="publisher">Publisher</label><br>
+        <input type="text" name="publisher" id="publisher"><br>
         <label for="publish_year">Publish Year:</label><br>
         <input type="number" name="publish_year" id="publish_year"><br>
         <label for="genre">Genre:</label><br>
         <input type="text" name="genre" id="genre"><br>
-        <label for="cover">Cover:</label><br>
-        <input type="text" name="cover" id="cover"><br>
-        <label for="movie_link">Movie Link (optional):</label><br>
-        <input type="text" name="movie_link" id="movie_link"><br>
         <label for="page_count">Page Count:</label><br>
         <input type="number" name="page_count" id="page_count"><br>
+        <label for="price">Price:</label><br>
+        <input type="number" name="price" id="price"><br>
         <button type="submit">Submit</button>
         </form>
     </div id='publishbook'>
