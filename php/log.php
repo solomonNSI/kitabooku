@@ -15,7 +15,7 @@ $data = $result->fetch_assoc();
 
 if ($data['count'] > 0) {
     session_start();
-    $_SESSION['userID'] = $password; // pass the username as userID to the other pages
+    $_SESSION['userID'] = $username; // pass the username as userID to the other pages
     header('Location: homepage.php');
 } else {
     echo '<script>alert("Login failed, wrong credentials.");';
