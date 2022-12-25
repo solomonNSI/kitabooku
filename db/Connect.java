@@ -210,12 +210,15 @@ public class Connect{
             stmt.executeUpdate("INSERT INTO Review VALUES ('3', 'Guzel kitap ama ikinci daha iyi', '3')");
             stmt.executeUpdate("INSERT INTO Review VALUES ('4', 'Guzel kitap ama ucuncu daha iyi', '2')");
             stmt.executeUpdate("INSERT INTO Review VALUES ('5', 'Guzel kitap ama dorduncu daha iyi', '1')");
+            stmt.executeUpdate("INSERT INTO Review VALUES ('6', 'Guzel kitap', '5')");
 
-            stmt.executeUpdate("INSERT INTO has_review VALUES ('2', '1')"); //b_id, r_id
+            stmt.executeUpdate("INSERT INTO has_review VALUES ('1', '1')"); //b_id, r_id
+            stmt.executeUpdate("INSERT INTO has_review VALUES ('2', '6')");
             stmt.executeUpdate("INSERT INTO has_review VALUES ('3', '2')");
             stmt.executeUpdate("INSERT INTO has_review VALUES ('4', '3')");
             stmt.executeUpdate("INSERT INTO has_review VALUES ('5', '4')");
             stmt.executeUpdate("INSERT INTO has_review VALUES ('6', '5')");
+            
 
 
             stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '1', '22/12/2022')");
@@ -223,6 +226,7 @@ public class Connect{
             stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '3', '22/12/2022')");
             stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '4', '22/12/2022')");
             stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '5', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '6', '22/12/2022')");
 
             stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '2', '12/12/2022', '22/12/2022')");
             stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '3', '12/12/2022', '22/12/2022')");
