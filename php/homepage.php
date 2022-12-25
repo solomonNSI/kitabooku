@@ -54,9 +54,12 @@
                         if (mysqli_num_rows($result) > 0) {
                             // Output the data
                             while ($row = mysqli_fetch_assoc($result)) {
-                                foreach($row as $col){
-                                    echo "<p>" . $col . "</p>";
-                                }
+                                echo "<p>" . $row['text'] . "</p>";
+                                echo "<p>" . $row['rating'] . "</p>";
+
+                            // foreach($row as $col){
+                            //     echo "<p>" . $col . "</p>";
+                            // }
                             }
                         } else {
                             echo "No reviews found.";
