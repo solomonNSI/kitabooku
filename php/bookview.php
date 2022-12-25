@@ -98,7 +98,7 @@
                 <div id="book-view-buttons" style="display: flex; margin: 10px;">
                     <button type="submit" name="mark-as-read-button">Mark As Read</button>
                     <button id="add-review-button">Add Review</button>
-                    <input type="submit" name="Add Quote" value="Add Quote"/>
+                    <button id="add-quote-button">Add Quote</button>
                 </div>
             </form>
             <div id="book-about">
