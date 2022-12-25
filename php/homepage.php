@@ -89,12 +89,15 @@
                                 die("Connection failed: " . mysqli_connect_error());
                             }
 
+
+
                             // Prepare the SQL query
                             $sql = "SELECT e.b_id, b.title, e.price FROM E_Book e, Book b WHERE b.b_id = e.b_id";
                             echo "<p> hey " . $username . "! You can buy your favorite ebooks from here...</p";
                             echo "<p></p>";
-                            // Execute the query
                             $result = mysqli_query($db, $sql);
+
+                            
                             
                             // Check if the query was successful
                             if (mysqli_num_rows($result) > 0) {
