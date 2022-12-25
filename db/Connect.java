@@ -14,19 +14,28 @@ import java.sql.ResultSetMetaData;
 public class Connect{
 
     // Constants
-    private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "gokberk!";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/kitabooku";
+    // local db credentials
+    //private static final String DB_USERNAME = "root";
+    //private static final String DB_PASSWORD = "gokberk!";
+    //private static final String DB_URL = "jdbc:mysql://localhost:3306/kitabooku";
+    // dijkstra credentials
+    private static final String DB_USERNAME = "g.keskinkilic";
+    private static final String DB_PASSWORD = "iwliDXMQ";
+    //private static final String DB_NAME = "g_keskinkilic";
+    private static final String DB_URL = "jdbc:mysql://g.keskinkilic@dijkstra.ug.bcc.bilkent.edu.tr/g_keskinkilic?user="
+            + DB_USERNAME + "&password=" + DB_PASSWORD;
+
 
     public static void main(String[] args){
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+        try (Connection connection = DriverManager.getConnection(DB_URL); //DB_URL, DB_USERNAME, DB_PASSWORD for local
              Statement stmt = connection.createStatement()) {
             // Drop the tables if they already exist
             stmt.executeUpdate("DROP TABLE IF EXISTS has_review;");
             stmt.executeUpdate("DROP TABLE IF EXISTS post;");
             stmt.executeUpdate("DROP TABLE IF EXISTS has_wallet;");
+            stmt.executeUpdate("DROP TABLE IF EXISTS publish;");
             stmt.executeUpdate("DROP TABLE IF EXISTS Wallet;");
-            //stmt.executeUpdate("DROP TABLE IF EXISTS read;");
+            stmt.executeUpdate("DROP TABLE IF EXISTS read_book;");
 
             // (AUTHORUSER, should be dropped first to ensure no error occurs due to foreign key constraints)
             stmt.executeUpdate("DROP TABLE IF EXISTS AuthorUser;");
@@ -77,6 +86,7 @@ public class Connect{
                 "CREATE TABLE Book("+
                     "b_id INT NOT NULL,"+
                     "title VARCHAR(60) NOT NULL,"+
+                    "author VARCHAR(100) NOT NULL,"+
                     "publisher VARCHAR(60) NOT NULL,"+
                     "publish_year INT NOT NULL,"+
                     "genre VARCHAR(60) NOT NULL,"+
@@ -108,21 +118,24 @@ public class Connect{
                     "CREATE TABLE post(" +
                         "username    VARCHAR(255)," +
                         "r_id    INT," +
+                        "date VARCHAR(10) NOT NULL,"+
                         "PRIMARY KEY (username, r_id)," +
                         "FOREIGN KEY (username) REFERENCES Reader(username) ON DELETE CASCADE," +
                         "FOREIGN KEY (r_id) REFERENCES Review(r_id) ON DELETE CASCADE" +
                     ") ENGINE=InnoDB;"
             );
 
-/*             stmt.executeUpdate(
-                    "CREATE TABLE read(" +
+            stmt.executeUpdate(
+                    "CREATE TABLE read_book(" +
                         "username    VARCHAR(255)," +
                         "b_id    INT," +
+                        "start VARCHAR(10),"+
+                        "end VARCHAR(10),"+
                         "PRIMARY KEY (username, b_id)," +
                         "FOREIGN KEY (username) REFERENCES Reader(username) ON DELETE CASCADE," +
                         "FOREIGN KEY (b_id) REFERENCES Book(b_id) ON DELETE CASCADE" +
                     ") ENGINE=InnoDB;"
-            ); */
+            );
 
             stmt.executeUpdate(
                 "CREATE TABLE E_Book("+
@@ -141,13 +154,24 @@ public class Connect{
             );
 
             stmt.executeUpdate(
-                    "CREATE TABLE has_wallet(" +
-                        "username    VARCHAR(255)," +
-                        "w_id    INT," +
-                        "PRIMARY KEY (username, w_id)," +
-                        "FOREIGN KEY (username) REFERENCES Reader(username) ON DELETE CASCADE," +
-                        "FOREIGN KEY (w_id) REFERENCES Wallet(w_id) ON DELETE CASCADE" +
-                    ") ENGINE=InnoDB;"
+                "CREATE TABLE has_wallet(" +
+                    "username    VARCHAR(255)," +
+                    "w_id    INT," +
+                    "PRIMARY KEY (username, w_id)," +
+                    "FOREIGN KEY (username) REFERENCES Reader(username) ON DELETE CASCADE," +
+                    "FOREIGN KEY (w_id) REFERENCES Wallet(w_id) ON DELETE CASCADE" +
+               ") ENGINE=InnoDB;"
+            );
+
+            stmt.executeUpdate(
+                "CREATE TABLE publish(" +
+                    "username    VARCHAR(255)," +
+                    "b_id    INT," +
+                    "date VARCHAR(10) NOT NULL," +
+                    "PRIMARY KEY (username, b_id)," +
+                    "FOREIGN KEY (username) REFERENCES AuthorUser(username) ON DELETE CASCADE," +
+                    "FOREIGN KEY (b_id) REFERENCES Book(b_id) ON DELETE CASCADE" +
+               ") ENGINE=InnoDB;"
             );
 
 
@@ -165,20 +189,22 @@ public class Connect{
             stmt.executeUpdate("INSERT INTO User VALUES ('aydo', 'ay@x.com', 'pass');");
             stmt.executeUpdate("INSERT INTO Admin VALUES ('aydo');");
 
-            stmt.executeUpdate("INSERT INTO Book VALUES ('1', 'Nutuk', 'YKY', '1927', 'Speech', '543');");
-            stmt.executeUpdate("INSERT INTO Book VALUES ('2', 'Harry Potter', 'YKY', '1999', 'Fiction', '493');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('1', 'Nutuk', 'Mustafa Kemal Atatürk', 'YKY', '1927', 'Speech', '543');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('2', 'Harry Potter', 'J. K. Rowling', 'YKY', '1999', 'Fiction', '493');");
 
-            stmt.executeUpdate("INSERT INTO Book VALUES ('3', 'MyBook', 'ME', '2022', 'Bio', '100');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('3', 'MyBook', 'Edward Snowden', 'internet', '2022', 'Bio', '100');");
             stmt.executeUpdate("INSERT INTO E_Book VALUES ('3', '20');");
 
             stmt.executeUpdate("INSERT INTO Review VALUES ('1', 'Güzel kitap', '5')");
 
             stmt.executeUpdate("INSERT INTO has_review VALUES ('2', '1')");
-            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '1')");
-            //stmt.executeUpdate("INSERT INTO read VALUES ('sulo', '2')");
+            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '1', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '2', '12/12/2022', '22/12/2022')");
 
             stmt.executeUpdate("INSERT INTO Wallet VALUES ('1', '1000')");
             stmt.executeUpdate("INSERT INTO has_wallet VALUES ('gokiberk', '1')");
+
+            stmt.executeUpdate("INSERT INTO publish VALUES ('sulo', '3', '22/12/2022')");
 
 
 
