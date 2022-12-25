@@ -1,55 +1,47 @@
 <?php
     require 'ConnectServer.class.php';
-    $b_id = 2;
+    if(isset($_GET['b_id'])) { 
+        $b_id = $_GET['b_id'];
+    }
+    
     $db = ConnectServer::connect();
+
     if (!empty($_SESSION)) {
         $username = $_SESSION['userID'];
     }
 
-    if(isset($_POST['Mark As Read']))
+    // TODO: fix this
+    if(isset($_POST['mark-as-read-button']))
     {
-        $sql = "INSERT INTO read_book VALUES ('" .  $username . "', '" . $b_id . "', '12/12/2022', '22/12/2022')";
-        $result = mysqli_query($db, $sql);
+        $query = "INSERT INTO read_book VALUES ('" . $username . "', '" . $b_id . "', '".CURDATE()."', '".CURDATE()."')";
 
-        echo "<div>". $result . "</div>";
-        echo "<script type='text/javascript'>alert('Book is marked as read.');</script>";
+        $run = mysqli_query($db, $query) or die(mysqli_error());
+
+        if ($run ) { echo "<script type='text/javascript'>alert('Book is marked as read.');</script>"; }
+        else  { echo "<script type='text/javascript'>alert('Book couldn't be marked as read.');</script>"; }
     }
 
-    if(isset($_POST['Add Review']))
+    if(isset($_POST['submit']))
     {
-        $sql = "INSERT INTO Review VALUES ('" .  $username . "', '" . $b_id . "', '12/12/2022', '22/12/2022')";
-        $result = mysqli_query($db, $sql);
+        if (!empty($_POST['review']) && !empty($_POST['review'])) {
+            $review = $_POST['review'];
+            $rating = $_POST['rating'];
 
-        echo "<div>". $result . "</div>";
-        echo "<script type='text/javascript'>alert('Book is marked as read.');</script>";
-    }
+            // put total review count + 1 as r_id
+            $totalReviewCount = mysqli_query($db, "SELECT COUNT(*) as count FROM Review");
+            $temp = mysqli_fetch_array($totalReviewCount);
+            $count = $temp['count'] + 1;
 
-    // if (isset($_POST["add-review"])) {
-    //     $_SESSION["add-review"] = mysqli_query($db, "INSERT INTO read_book VALUES" . $_POST['r_id'] . $_POST['text'] . $_POST['rating'] );
-    //     $_SESSION["add-review"] = mysqli_query($db, "INSERT INTO has_review VALUES" . $_POST['r_id'] . $_POST['b_id']);
+            // prepare SQLs
+            $query = "INSERT INTO Review VALUES ('". $count . "', '" . $review . "', '" . $rating ."')";
+            $query2 = "INSERT INTO has_review VALUES ('". $b_id . "', '" . $count ."')";            $query = "INSERT INTO Review VALUES ('". $count . "', '" . $review . "', '" . $rating ."')";
 
-    //     if ($_SESSION["add-review"] == true)
-    //         echo "<script type='text/javascript'>alert('Review is added.');</script>";
-    //     else
-    //         echo "<script type='text/javascript'>alert('Review couldn't be added.');</script>";
-        
-    //     header("location: bookview.php");
-    //     unset($_SESSION["add-review"]);
-    //     exit;
-    // }
+            $run = mysqli_query($db, $query) or die(mysqli_error());
+            $run2 = mysqli_query($db, $query2) or die(mysqli_error());
 
-    if (isset($_POST["add-quote"])) {
-        $_SESSION["add-quote"] = mysqli_query($db, "INSERT INTO read_book VALUES" . $_POST['q_id'] . $_POST['text'] . $_POST['page_no'] );
-        $_SESSION["add-quote"] = mysqli_query($db, "INSERT INTO has_quote VALUES" . $_POST['q_id'] . $_POST['b_id']);
-        
-        if ($_SESSION["add-quote"] == true)
-            echo "<script type='text/javascript'>alert('Quote is added.');</script>";
-        else
-            echo "<script type='text/javascript'>alert('Quote couldn't be added.');</script>";
-        
-        header("location: bookview.php");
-        unset($_SESSION["add-quote"]);
-        exit;
+            if ($run && $run2 ) { echo "<script type='text/javascript'>alert('Review is added.');</script>"; }
+            else  { echo "<script type='text/javascript'>alert('Review couldn't be added.');</script>"; }
+        }
     }
 ?>
 
@@ -66,8 +58,8 @@
                     if ($db) {
                         $bookData = mysqli_query($db, "SELECT * FROM Book WHERE b_id ='" . $b_id . "'");
                         $book = mysqli_fetch_array($bookData);
-                        echo "<div>" . $book['title'] . "</div>";
-                        echo "<div>" . $book['author'] . "</div>";
+                        echo "<h1>" . $book['title'] . "</h1>";
+                        echo "<h3>" . $book['author'] . "</h3>";
 
                         $reviewCount = mysqli_query($db, "SELECT COUNT(*) as count
                                                         FROM Book, Review, has_review
@@ -79,11 +71,32 @@
                     }
                     else echo "<h1>Failed to connect to database...</h1>" . $b_id;
                 ?>
+                <?php
+                    // Display the average rating
+                    if ($db) {
+                        // Prepare the SQL query
+                        $sql = "SELECT ROUND(AVG(Review.rating), 1) as avg
+                                FROM Book, Review, has_review
+                                WHERE Book.b_id = has_review.b_id  AND
+                                    Review.r_id  = has_review.r_id AND
+                                    Book.b_id = '" .  $b_id  . "'";
+                        $result = mysqli_query($db, $sql);
+                        $avg_rating = mysqli_fetch_array($result);
+
+                        // Check if the query was successful
+                        if ($avg_rating) {
+                          echo "<div>Rating: " . $avg_rating['avg'] ." / 5</div>";
+                        } else {
+                            echo "<div>No rating found</div>";
+                        }
+                    } else {
+                        echo "<div>Couldn't connect to the database</div>";
+                    }
+                ?>
             </div>
             <form method="post">
                 <div id="book-view-buttons" style="display: flex; margin: 10px;">
-                    
-                    <button id="mark-as-read-button">Mark As Read</button>
+                    <button type="submit" name="mark-as-read-button">Mark As Read</button>
                     <button id="add-review-button">Add Review</button>
                     <input type="submit" name="Add Quote" value="Add Quote"/>
                 </div>
@@ -108,21 +121,20 @@
                     // Display reviews of the book
                     if ($db) {
                         // Prepare the SQL query
-                        $sql = "SELECT Review.text 
+                        $sql = "SELECT Review.text, Review.rating
                                 FROM Book, Review, has_review
                                 WHERE Book.b_id = has_review.b_id  AND
                                     Review.r_id  = has_review.r_id AND
                                     Book.b_id = '" .  $b_id  . "'";
-
                         $result = mysqli_query($db, $sql);
 
                         // Check if the query was successful
                         if (mysqli_num_rows($result) > 0) {
                             // Output the data
                             while ($row = mysqli_fetch_assoc($result)) {
-                                foreach($row as $col){
-                                    echo "<p>" . $col . "</p>";
-                                }
+                                echo "<p> Review: " . $row['text'] . "</p>";
+                                echo "<p> Rating: " . $row['rating'] . "</p>";
+                                echo "<hr>";
                             }
                         } else {
                             echo "<div>No reviews found.</div>";
@@ -134,23 +146,23 @@
             </div>
 
             <div id="myModal" class="modal">
-                <!-- Modal content -->
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <form action="" method="">
-                        <label>Rating: </label><input type="text" name="rating"><br>
-                        <label>Review: </label><input type="text" name="review"><br>
-                        <button type="submit" name="submit">Submit</button>
+                    <form action="" method="post">
+                        <label>Review: </label><input class="reviewInput" type="text" name="review" required><br>
+                        <label>Rating: </label><input class="ratingInput" type="text" name="rating" required> / 5<br>
+                        <button class="review-submit-button" type="submit" name="submit">Submit</button>
                     </form>
                 </div>
             </div>
+
             <script>
                 var modal = document.getElementById('myModal');
                 var btn = document.getElementById('add-review-button');
                 var span = document.getElementsByClassName('close')[0];
                 
-                btn.onclick = function() { modal.style.display = 'block'; }
-                span.onclick = function() { modal.style.display = 'none'; }
+                btn.onclick = function() { modal.style.display = 'block';}
+                span.onclick = function() { modal.style.display = 'none';}
                 window.onclick = function(event) {
                     if (event.target == modal) {
                         modal.style.display = 'none';
