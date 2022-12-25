@@ -10,6 +10,7 @@
 <body>
     <!-- All books table -->
     <h1> All Books here </h1>
+
     <?php
 
     if (!$db) {
@@ -22,6 +23,9 @@
 
     // Check if the query was successful
     if (mysqli_num_rows($result) > 0) {
+        echo "<div style='display: flex;'>";
+        echo "<h4>Search: <h4>";
+        echo "<input type='text' name='search'></div>";
         // Output the data
         while ($row = mysqli_fetch_assoc($result)) {
             // Create a clickable link using the title as the anchor text
@@ -31,12 +35,12 @@
             echo "<hr>";
         }
     } else {
-        echo "No reviews found.";
+        echo "No books found.";
     }
     ?>
     <h1> Couldn't find your book?</h1>
     <div id='addbook'>
-        <h1 class="title">Publish a Book</h1>
+        <h1 class="title">Request a Book</h1>
         <form class="form" method='post' onsubmit='return validateForm();' action='addbook.php'>
             <label for="title">Title:</label><br>
             <input type="text" name="title" id="title"><br>
