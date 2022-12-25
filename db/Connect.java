@@ -71,6 +71,7 @@ public class Connect{
             stmt.executeUpdate(
                 "CREATE TABLE AuthorUser(" +
                     "username VARCHAR(255) NOT NULL,"+
+                    "birthdate DATE NOT NULL,"+
                     "FOREIGN KEY (username) REFERENCES Reader(username)"+
                 ")ENGINE=INNODB;"
             );
@@ -184,84 +185,121 @@ public class Connect{
 
             stmt.executeUpdate("INSERT INTO User VALUES ('sulo', 'sh@x.com', 'pass');");
             stmt.executeUpdate("INSERT INTO Reader VALUES ('sulo', '0', '0', 'Sulo Fav Quote');");
-            stmt.executeUpdate("INSERT INTO AuthorUser VALUES ('sulo');");
+            stmt.executeUpdate("INSERT INTO AuthorUser VALUES ('sulo', '2002-07-19');");
 
             stmt.executeUpdate("INSERT INTO User VALUES ('aydo', 'ay@x.com', 'pass');");
             stmt.executeUpdate("INSERT INTO Admin VALUES ('aydo');");
 
-            stmt.executeUpdate("INSERT INTO Book VALUES ('1', 'Nutuk', 'Mustafa Kemal Atatürk', 'YKY', '1927', 'Speech', '543');");
-            stmt.executeUpdate("INSERT INTO Book VALUES ('2', 'Harry Potter', 'J. K. Rowling', 'YKY', '1999', 'Fiction', '493');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('1', 'Nutuk', 'Mustafa Kemal Ataturk', 'YKY', '1927', 'Speech', '543');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('2', 'Harry Potter1', 'J. K. Rowling', 'YKY', '1999', 'Fiction', '493');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('3', 'Harry Potter2', 'J. K. Rowling', 'YKY', '2001', 'Fiction', '393');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('4', 'Harry Potter3', 'J. K. Rowling', 'YKY', '2003', 'Fiction', '293');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('5', 'Harry Potter4', 'J. K. Rowling', 'YKY', '2005', 'Fiction', '193');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('6', 'Mai ve Siyah', 'Halit Ziya Usakligil', 'YKY', '1980', 'Novel', '250');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('7', 'Aski Memnu', 'Halit Ziya Usakligil', 'YKY', '1970', 'Novel', '290');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('8', 'Araba Sevdasi', 'Recaizade Mahmut Ekrem', 'YKY', '1980', 'Novel', '250');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('9', 'Cin Ali', 'Ali Cin', 'Dogan Kitap', '2010', 'Karikatür', '80');");
 
-            stmt.executeUpdate("INSERT INTO Book VALUES ('3', 'MyBook', 'Edward Snowden', 'internet', '2022', 'Bio', '100');");
-            stmt.executeUpdate("INSERT INTO E_Book VALUES ('3', '20');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('10', 'MyBook', 'Edward Snowden', 'internet', '2022', 'Bio', '100');");
+            stmt.executeUpdate("INSERT INTO E_Book VALUES ('10', '20');");
+            stmt.executeUpdate("INSERT INTO Book VALUES ('11', 'MyBook2', 'Edward Snowden', 'internet', '2023', 'Bio', '101');");
+            stmt.executeUpdate("INSERT INTO E_Book VALUES ('11', '30');");
 
-            stmt.executeUpdate("INSERT INTO Review VALUES ('1', 'Güzel kitap', '5')");
+            stmt.executeUpdate("INSERT INTO Review VALUES ('1', 'Guzel kitap, belki de en iyisi', '5')");
+            stmt.executeUpdate("INSERT INTO Review VALUES ('2', 'Guzel kitap ama ilki daha iyi', '4')");
+            stmt.executeUpdate("INSERT INTO Review VALUES ('3', 'Guzel kitap ama ikinci daha iyi', '3')");
+            stmt.executeUpdate("INSERT INTO Review VALUES ('4', 'Guzel kitap ama ucuncu daha iyi', '2')");
+            stmt.executeUpdate("INSERT INTO Review VALUES ('5', 'Guzel kitap ama dorduncu daha iyi', '1')");
 
-            stmt.executeUpdate("INSERT INTO has_review VALUES ('2', '1')");
+            stmt.executeUpdate("INSERT INTO has_review VALUES ('2', '1')"); //b_id, r_id
+            stmt.executeUpdate("INSERT INTO has_review VALUES ('3', '2')");
+            stmt.executeUpdate("INSERT INTO has_review VALUES ('4', '3')");
+            stmt.executeUpdate("INSERT INTO has_review VALUES ('5', '4')");
+            stmt.executeUpdate("INSERT INTO has_review VALUES ('6', '5')");
+
+
             stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '1', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '2', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '3', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '4', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '5', '22/12/2022')");
+
             stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '2', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '3', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '4', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '5', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '6', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '7', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '8', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('gokiberk', '1', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('gokiberk', '6', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('gokiberk', '7', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('gokiberk', '8', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('shanab', '10', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('shanab', '11', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('shanab', '9', '12/12/2022', '22/12/2022')");
+
+
 
             stmt.executeUpdate("INSERT INTO Wallet VALUES ('1', '1000')");
+            stmt.executeUpdate("INSERT INTO Wallet VALUES ('2', '2000')");
+            stmt.executeUpdate("INSERT INTO Wallet VALUES ('3', '3000')");
             stmt.executeUpdate("INSERT INTO has_wallet VALUES ('gokiberk', '1')");
+            stmt.executeUpdate("INSERT INTO has_wallet VALUES ('sulo', '2')");
+            stmt.executeUpdate("INSERT INTO has_wallet VALUES ('shanab', '3')");
 
-            stmt.executeUpdate("INSERT INTO publish VALUES ('sulo', '3', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO publish VALUES ('sulo', '10', '22/12/2022')");
 
 
-
+            
             ResultSet rs = stmt.executeQuery("SELECT * FROM User;");
             try {
                 displayTable(rs);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            
             rs = stmt.executeQuery("SELECT * FROM Reader;");
             try {
                 displayTable(rs);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            
             rs = stmt.executeQuery("SELECT * FROM Admin;");
             try {
                 displayTable(rs);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            
             rs = stmt.executeQuery("SELECT * FROM AuthorUser;");
             try {
                 displayTable(rs);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            
             rs = stmt.executeQuery("SELECT * FROM Book;");
             try {
                 displayTable(rs);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            
             rs = stmt.executeQuery("SELECT * FROM Review;");
             try {
                 displayTable(rs);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            rs = stmt.executeQuery("SELECT Book.title, Review.text, Review.rating FROM Book NATURAL JOIN has_review, Review;");
-            try {
-                displayTable(rs);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+
             rs = stmt.executeQuery("SELECT u.username, r.text FROM Review r, post p, Reader u WHERE r.r_id = p.r_id AND p.username = u.username;");
             try {
                 displayTable(rs);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            /* rs = stmt.executeQuery("SELECT u.username, b.title FROM Book b, read r, Reader u WHERE r.b_id = b.b_id AND r.username = u.username;");
-            try {
-                displayTable(rs);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } */
             rs = stmt.executeQuery("SELECT * FROM E_Book NATURAL JOIN Book;");
             try {
                 displayTable(rs);
