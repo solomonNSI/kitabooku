@@ -9,60 +9,76 @@
     
 ?>
 <html>
-<head>
-    <title>Homepage</title>
-</head>
-<body>
-    <h1>Reviews</h1>
-    <div>
-        <!-- Sidebar -->
-        <div style="float: left; width: 20%;">
-            <h3>Discover</h3>
-            <ul>
-                <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=feed">Feed</a></li>
-                <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=lists">Lists</a></li>
-                <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=leaderboard">Leaderboard</a></li>
-                <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=buy">Buy e-books</a></li>
-                <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=forums">Forums</a></li>
-                <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=settings">Settings</a></li>
-            </ul>
-        </div>
-        <!-- Main content -->
-        <div style="float: right; width: 80%;">
-            <h1>Welcome to the Homepage</h1>
-            <p>This is the homepage of our website.</p>
+    <head>
+        <title>Homepage</title>
+    </head>
+    <body>
+        <div>
+            <!-- Sidebar -->
+            <div style="float: left; width: 20%;">
+                <h3>Discover</h3>
+                <ul>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=feed">Feed</a></li>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=lists">Lists</a></li>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=allbooks">All Books</a></li>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=leaderboard">Leaderboard</a></li>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=buyebook">Buy e-books</a></li>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=forums">Forums</a></li>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=settings">Settings</a></li>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=publishebook">Publish E-Book</a></li>
+                </ul>
+            </div>
+            <!-- Main content -->
+            <div style="float: right; width: 80%;">
+                <!-- Display different content based on the value of the "page" parameter -->
+                <?php
+                    if (isset($_GET["page"])) {
+                        $page = $_GET["page"];
 
-            <!-- Display different content based on the value of the "page" parameter -->
-            <?php
+                        if ($page == "feed") {
+                            // Connect to the database
+                            //$userID = $_SESSION["userID"];
+                            // Check connection
+                            echo "<h1>Welcome to the Homepage</h1>";
+                            echo "<h3>Reviews/Quotes</h3>";
 
-                if (isset($_GET["page"])) {
-                    $page = $_GET["page"];
-
-                    if ($page == "feed") {
-                        // Connect to the database
-                        //$userID = $_SESSION["userID"];
-                        // Check connection
-                        if (!$db) {
-                            die("Connection failed: " . mysqli_connect_error());
-                        }
-
-                        // Prepare the SQL query
-                        $sql = "SELECT * FROM Review";
-                        echo "<div> hey" . $username . " yes</div";
-                        // Execute the query
-                        $result = mysqli_query($db, $sql);
-
-                        // Check if the query was successful
-                        if (mysqli_num_rows($result) > 0) {
-                            // Output the data
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                foreach($row as $col){
-                                    echo "<p>" . $col . "</p>";
-                                }
+                            if (!$db) {
+                                die("Connection failed: " . mysqli_connect_error());
                             }
-                        } else {
-                            echo "No reviews found.";
+                            // Prepare the SQL query
+                            $sql = "SELECT * FROM Review NATURAL JOIN has_review NATURAL JOIN Book";
+                            // Execute the query
+                            $result = mysqli_query($db, $sql);
+
+                            // Check if the query was successful
+                            if (mysqli_num_rows($result) > 0) {
+                                // Output the data
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<p> Review: " . $row['text'] . "</p>";
+                                    echo "<p> Rating: " . $row['rating'] . "</p>";
+                                    echo "<p> Book:" . $row['title'] . "</p>";
+                                    echo "<hr>";
+                                }
+                            } else {
+                                echo "No reviews found.";
+                            }
+
+                        } elseif ($page == "lists") {
+                            include "lists.php";
+                        } elseif ($page == "leaderboard") {
+                            include "leaderboard.php";
+                        } elseif ($page == "buyebook") {
+                            include "e-book.php";
+                        } elseif ($page == "forums") {
+                            include "forums.php";
+                        } elseif ($page == "settings") {
+                            include "settings.php";
+                        } elseif ($page == "allbooks") {
+                            include "allbooks.php";
+                        } elseif ($page == "publishebook") {
+                            include "publishebook.php";
                         }
+
                     } elseif ($page == "lists") {
                         include "lists.php";
                     } elseif ($page == "leaderboard") {
@@ -112,10 +128,10 @@
                         include "forums.php";
                     } elseif ($page == "settings") {
                         include "settings.php";
+
                     }
-                }
-            ?>
+                ?>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

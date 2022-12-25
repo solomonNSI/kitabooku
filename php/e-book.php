@@ -1,6 +1,4 @@
 <?php
-    include('config.php');
-
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $sql = "SELECT * FROM ebook ORDER BY title DESC";

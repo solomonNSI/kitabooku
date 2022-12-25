@@ -17,7 +17,7 @@
         <br><br>
         <br>
         <br>
-        <button class="button" onclick="location = 'signup.php'"; >Create Account</button>
+        <button disabled class="button" onclick="location = 'signup.php'"; >Create Account</button>
     </body>
 </html>
 
