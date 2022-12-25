@@ -9,7 +9,7 @@
     <body>
     
     <div id='publishbook'>
-        <h1 class ="title">Publish a Book</h1>
+        <h1 class ="title">Publish an E-Book</h1>
         <form class="form" method='post' onsubmit='return validateForm();' action='publish.php'>
         
         <label for="title">Title:</label><br>

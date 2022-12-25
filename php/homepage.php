@@ -23,7 +23,7 @@
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=buyebook">Buy e-books</a></li>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=forums">Forums</a></li>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=settings">Settings</a></li>
-                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=publishbook">Publish Book</a></li>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=publishebook">Publish E-Book</a></li>
                 </ul>
             </div>
             <!-- Main content -->
@@ -73,8 +73,8 @@
                             include "settings.php";
                         } elseif ($page == "allbooks") {
                             include "allbooks.php";
-                        } elseif ($page == "publishbook") {
-                            include "publishbook.php";
+                        } elseif ($page == "publishebook") {
+                            include "publishebook.php";
                         }
                     }
                 ?>
