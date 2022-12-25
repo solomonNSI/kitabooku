@@ -209,7 +209,7 @@ public class Connect{
             stmt.executeUpdate("INSERT INTO Review VALUES ('2', 'Guzel kitap ama ilki daha iyi', '4')");
             stmt.executeUpdate("INSERT INTO Review VALUES ('3', 'Guzel kitap ama ikinci daha iyi', '3')");
             stmt.executeUpdate("INSERT INTO Review VALUES ('4', 'Guzel kitap ama ucuncu daha iyi', '2')");
-            stmt.executeUpdate("INSERT INTO Review VALUES ('5', 'Guzel kitap ama dorduncu daha iyi', '1')");
+            stmt.executeUpdate("INSERT INTO Review VALUES ('5', 'Guzel kitap ama adi mavi olsa daha iyi', '1')");
             stmt.executeUpdate("INSERT INTO Review VALUES ('6', 'Guzel kitap', '5')");
 
             stmt.executeUpdate("INSERT INTO has_review VALUES ('1', '1')"); //b_id, r_id
