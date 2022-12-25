@@ -32,6 +32,7 @@
     <!-- Leaderboard table -->
     <table>
         <tr>
+            <th>Place</th>
             <th>Username</th>
             <th>Number of Read Books</th>
         </tr>
@@ -42,9 +43,11 @@
                         ORDER BY num_books 
                         DESC";
         $result = mysqli_query($db, $sql);
+        $place = 1;
         while ($row = $result->fetch_assoc()) {
             $leaderboard[] = $row;
-            echo "<tr><td>" . $row['username'] . "</td><td>" . $row['num_books'] . "</td></tr>";
+            echo "<tr><td>" . $place . "</td><td>" . $row['username'] . "</td><td>" . $row['num_books'] . "</td></tr>";
+            $place++;
         }
         ?>
     </table>
