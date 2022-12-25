@@ -1,3 +1,30 @@
+
+<head>
+    <title>Leaderboard</title>
+    <style>
+        /* CSS for the leaderboard table */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* CSS for the table header */
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
 <?php
 require 'ConnectServer.class.php';
 $conn = ConnectServer::connect();

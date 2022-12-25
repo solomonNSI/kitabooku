@@ -36,6 +36,8 @@
             <th>Username</th>
             <th>Number of Read Books</th>
         </tr>
+        
+        <h1> The Leaderboard </h1>
         <?php
         $sql = "SELECT Reader.username, COUNT(*) AS num_books 
                         FROM read_book NATURAL JOIN Reader
@@ -46,7 +48,8 @@
         $place = 1;
         while ($row = $result->fetch_assoc()) {
             $leaderboard[] = $row;
-            echo "<tr><td>" . $place . "</td><td>" . $row['username'] . "</td><td>" . $row['num_books'] . "</td></tr>";
+            echo "<tr><td>" . $place . "</td><td><a href='user.php?username=" . $row['username'] . "'>" . $row['username'] . "</a></td><td>" . $row['num_books'] . "</td></tr>";
+
             $place++;
         }
         ?>

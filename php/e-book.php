@@ -31,6 +31,11 @@
 <body>
     <!-- Leaderboard table -->
     <table>
+        <tr>
+            <th>Book Title</th>
+            <th>Author</th>
+        </tr>
+        <h1> E-Books </h1>
         <?php
         $sql = "SELECT * 
                 FROM E_Book NATURAL JOIN Book 
@@ -38,13 +43,10 @@
                 DESC";
         $result = mysqli_query($db, $sql);
         while ($row = mysqli_fetch_array($result)) {
-            echo "<a href='bookview.php?b_id=" . $row['b_id'] . "'> Title: " . $row['title'] . "</a>";
-            echo "<div> Author: " . $row['author'] . "</div>";
-            echo "<div>   Price: " . $row['price'] . "</div>";
-            echo "<hr>";
+            echo "<tr><td><a href='bookview.php?b_id=" . $row['b_id'] . "'>" . $row['title'] . "</a></td><td>" . $row['author'] .  "</td></tr>";
+
+
         }
-
-
         ?>
     </table>
 </body>
