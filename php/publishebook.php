@@ -13,17 +13,17 @@
         <form class="form" method='post' onsubmit='return validateForm();' action='publish.php'>
         
         <label for="title">Title:</label><br>
-        <input type="text" name="title" id="title"><br>
+        <input type="text" name="title" id="title" required><br>
         <label for="publisher">Publisher</label><br>
-        <input type="text" name="publisher" id="publisher"><br>
+        <input type="text" name="publisher" id="publisher" required><br>
         <label for="publish_year">Publish Year:</label><br>
-        <input type="number" name="publish_year" id="publish_year"><br>
+        <input type="number" name="publish_year" id="publish_year" required><br>
         <label for="genre">Genre:</label><br>
-        <input type="text" name="genre" id="genre"><br>
+        <input type="text" name="genre" id="genre" required><br>
         <label for="page_count">Page Count:</label><br>
-        <input type="number" name="page_count" id="page_count"><br>
+        <input type="number" name="page_count" id="page_count" required><br>
         <label for="price">Price:</label><br>
-        <input type="number" name="price" id="price"><br>
+        <input type="number" name="price" id="price" required><br>
         <button type="submit">Submit</button>
         </form>
     </div id='publishbook'>
