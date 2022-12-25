@@ -5,8 +5,8 @@
         if($_SERVER["REQUEST_METHOD"] == "POST")
         {
 
-            $u_id = $_SESSION['u_id'];
-            $sql = "SELECT * FROM author NATURAL JOIN book WHERE u_id = '$u_id'";
+            $username = $_SESSION['username'];
+            $sql = "SELECT * FROM author NATURAL JOIN book WHERE username = '$username'";
             $result = mysqli_query($db,$sql);
             
             while ($row = mysqli_fetch_array($result)) {
@@ -56,7 +56,7 @@
             <th>Authors Ebooks</th>
         </tr>
         <?php
-            echo "<tr><td>" . $u_id;
+            echo "<tr><td>" . $username;
 
             // Loop through the leaderboard array and output the data
             foreach ($authorbooks as $entry) {
