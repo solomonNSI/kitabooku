@@ -1,6 +1,8 @@
 <?php
-    include('config.php');
+    require 'ConnectServer.class.php';
+    $db = ConnectServer::connect();
     session_start();
+    $username = $_SESSION['userID'];
 ?>
 <html>
 <head>
@@ -28,12 +30,13 @@
 
             <!-- Display different content based on the value of the "page" parameter -->
             <?php
+
                 if (isset($_GET["page"])) {
                     $page = $_GET["page"];
 
                     if ($page == "feed") {
                         // Connect to the database
-                        $userID = $_SESSION["userID"];
+                        //$userID = $_SESSION["userID"];
                         // Check connection
                         if (!$db) {
                             die("Connection failed: " . mysqli_connect_error());
