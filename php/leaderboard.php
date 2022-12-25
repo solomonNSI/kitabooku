@@ -1,17 +1,3 @@
-<?php
-    include('config.php');
-
-    if($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-        $sql = "SELECT * FROM leaderboard ORDER BY score DESC LIMIT 3";
-        $result = mysqli_query($db,$sql);
-        while ($row = mysqli_fetch_array($result)) {
-            $leaderboard[] = array('username' => $row['username'], 'score' => $row['score']);
-        }
-    }
-    ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,12 +30,32 @@
     <table>
         <tr>
             <th>Username</th>
-            <th>Score</th>
+            <th>Number of Read Books</th>
         </tr>
         <?php
+            include('config.php');
+            $leaderboard = array(
+                "Alice" => "100",
+                "Bob" => "95",
+                "Charlie" => "80",
+            );
+            if($_SERVER["REQUEST_METHOD"] == "POST")
+            {
+                $sql = "SELECT user.name, COUNT(*) AS num_books 
+                        FROM read JOIN reader 
+                        ON read.username = user.id 
+                        GROUP BY username 
+                        ORDER BY num_books 
+                        DESC LIMIT 3";
+                $result = mysqli_query($db,$sql);
+                while ($row = $result->fetch_assoc()) {
+                    $leaderboard[] = $row;
+                }
+            }   
             // Loop through the leaderboard array and output the data
-            foreach ($leaderboard as $entry) {
-                echo "<tr><td>" . $entry['username'] . "</td><td>" . $entry['score'] . "</td></tr>";
+
+            foreach ($leaderboard as $key => $value) {
+                echo "<tr><td>$key</td><td>$value</td></tr>";
             }
         ?>
     </table>
