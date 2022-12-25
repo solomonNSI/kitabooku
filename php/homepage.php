@@ -5,6 +5,8 @@
     if (!empty($_SESSION)) {
         $username = $_SESSION['userID'];
     }
+   
+    
 ?>
 <html>
     <head>
@@ -23,7 +25,7 @@
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=buyebook">Buy e-books</a></li>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=forums">Forums</a></li>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=settings">Settings</a></li>
-                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=publishbook">Publish Book</a></li>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=publishebook">Publish E-Book</a></li>
                 </ul>
             </div>
             <!-- Main content -->
@@ -74,9 +76,60 @@
                             include "settings.php";
                         } elseif ($page == "allbooks") {
                             include "allbooks.php";
-                        } elseif ($page == "publishbook") {
-                            include "publishbook.php";
+                        } elseif ($page == "publishebook") {
+                            include "publishebook.php";
                         }
+
+                    } elseif ($page == "lists") {
+                        include "lists.php";
+                    } elseif ($page == "leaderboard") {
+                        include "leaderboard.php";
+                    } elseif ($page == "buy") {
+                        if (!$db) {
+                            die("Connection failed: " . mysqli_connect_error());
+                        }
+
+                        // Prepare the SQL query
+                        $sql = "SELECT e.b_id, b.title, e.price FROM E_Book e, Book b WHERE b.b_id = e.b_id";
+                        echo "<p> hey " . $username . "! You can buy your favorite ebooks from here...</p";
+                        echo "<p></p>";
+                        // Execute the query
+                        $result = mysqli_query($db, $sql);
+                        
+                        // Check if the query was successful
+                        if (mysqli_num_rows($result) > 0) {
+                            // Output the data
+                            $bookSelect = "<br><br>BookID: <select name='b_id' required><option value=''>None</option>";
+                            $table = "<table border = '1'>";
+                            $table .= "<caption>All E-Books</caption>";
+                            $table .= '<tr> <th>ID</th> <th>Title</th> <th>Price</th>';
+                            while ($row = mysqli_fetch_assoc($result)){
+                                $table .= '<tr>';
+                                $b_id = $row['b_id'];
+                                $title = $row['title'];
+                                $price = $row['price'];
+                                $table .= '<td>' . $b_id . '</td>';
+                                $table .= '<td>' . $title . '</td>';
+                                $table .= '<td>' . $price . '</td>';
+                                
+                                //echo "<tr><td>id</td><td>{$row['title']}</td><td>{$row['price']}</td><td><button>Buy</button></td></tr>";
+                                $bookSelect .= "<option value='$b_id'>$b_id, $title</option>";
+                                $table .= '</tr>';
+                            }
+                            $bookSelect .= '</select>';
+                            $table .= "</table>";
+                            echo $table;
+                            $buy = "<br> <button type='submit'>Buy</button>";
+                            
+                            echo "<form method='post' action='buy_e-book.php'" . $bookSelect . $buy . '</form>';
+                        } else {
+                            echo "No reviews found.";
+                        }
+                    } elseif ($page == "forums") {
+                        include "forums.php";
+                    } elseif ($page == "settings") {
+                        include "settings.php";
+
                     }
                 ?>
             </div>

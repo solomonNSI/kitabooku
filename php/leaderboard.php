@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Leaderboard</title>
     <style>
@@ -9,7 +10,8 @@
             width: 100%;
         }
 
-        th, td {
+        th,
+        td {
             text-align: left;
             padding: 8px;
         }
@@ -25,42 +27,32 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Leaderboard table -->
     <table>
         <tr>
+            <th>Place</th>
             <th>Username</th>
             <th>Number of Read Books</th>
         </tr>
         <?php
-            include('config.php');
-            $leaderboard = array(
-                "Alice" => "100",
-                "Bob" => "95",
-                "Charlie" => "80",
-            );
-            if($_SERVER["REQUEST_METHOD"] == "POST")
-            {
-                $sql = "SELECT user.name, COUNT(*) AS num_books 
-                        FROM read JOIN reader 
-                        ON read.username = user.id 
+        $sql = "SELECT Reader.username, COUNT(*) AS num_books 
+                        FROM read_book NATURAL JOIN Reader
                         GROUP BY username 
                         ORDER BY num_books 
-                        DESC LIMIT 3";
-                $result = mysqli_query($db,$sql);
-                while ($row = $result->fetch_assoc()) {
-                    $leaderboard[] = $row;
-                }
-            }   
-            // Loop through the leaderboard array and output the data
-
-            foreach ($leaderboard as $key => $value) {
-                echo "<tr><td>$key</td><td>$value</td></tr>";
-            }
+                        DESC";
+        $result = mysqli_query($db, $sql);
+        $place = 1;
+        while ($row = $result->fetch_assoc()) {
+            $leaderboard[] = $row;
+            echo "<tr><td>" . $place . "</td><td>" . $row['username'] . "</td><td>" . $row['num_books'] . "</td></tr>";
+            $place++;
+        }
         ?>
     </table>
 </body>
+
 </html>
 
 <html>
-

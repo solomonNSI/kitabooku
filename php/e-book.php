@@ -1,21 +1,6 @@
-<?php
-    if($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-        $sql = "SELECT * FROM ebook ORDER BY title DESC";
-        $result = mysqli_query($db,$sql);
-        while ($row = mysqli_fetch_array($result)) {
-            $ebook[] = array('title' => $row['title'],
-                    'publisher' => $row['publisher'], 
-                    'publish_year' => $row['publish_year'],
-                    'genre' => $row['genre'],
-                    'price' => $row['price']);
-        }
-    }
-    ?>
-
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Leaderboard</title>
     <style>
@@ -25,7 +10,8 @@
             width: 100%;
         }
 
-        th, td {
+        th,
+        td {
             text-align: left;
             padding: 8px;
         }
@@ -41,6 +27,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Leaderboard table -->
     <table>
@@ -48,15 +35,26 @@
             <th>Ebooks</th>
         </tr>
         <?php
-            // Loop through the leaderboard array and output the data
-            foreach ($ebook as $entry) {
-            echo "<tr><td>" . $entry['title'] . "</td><td>" . $entry['publisher'] . "</td></tr>"
-                . $entry['publish_year'] . "</td></tr>" . $entry['genre'] . "</td></tr>" . $entry['price'];
-            }
+        $sql = "SELECT * 
+                FROM E_Book NATURAL JOIN Book 
+                ORDER BY title 
+                DESC";
+        $result = mysqli_query($db, $sql);
+        while ($row = mysqli_fetch_array($result)) {
+            echo "<tr><td>" . $row['title'] .
+                "</td><td>" . $row['author'] .
+                "</td><td>" . $row['publisher'] . 
+                "</td></tr>" . $row['publish_year'] .
+                "</td></tr>" . $row['genre'] .
+                "</td></tr>" . $row['page_count'] .
+                "</td></tr>" . $row['price'];
+        }
+
+
         ?>
     </table>
 </body>
+
 </html>
 
 <html>
-

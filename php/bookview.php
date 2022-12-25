@@ -13,9 +13,11 @@
     // TODO: fix this
     if(isset($_POST['mark-as-read-button']))
     {
-        $query = "INSERT INTO read_book VALUES ('" . $username . "', '" . $b_id . "', '".CURDATE()."', '".CURDATE()."')";
+        $query = "INSERT INTO read_book (username, b_id, start, end) 
+                    VALUES ('$username', '$b_id', 'today', 'tomorrow');";
+    
 
-        $run = mysqli_query($db, $query) or die(mysqli_error());
+        $run = mysqli_query($db, $query);
 
         if ($run ) { echo "<script type='text/javascript'>alert('Book is marked as read.');</script>"; }
         else  { echo "<script type='text/javascript'>alert('Book couldn't be marked as read.');</script>"; }
@@ -36,8 +38,8 @@
             $query = "INSERT INTO Review VALUES ('". $count . "', '" . $review . "', '" . $rating ."')";
             $query2 = "INSERT INTO has_review VALUES ('". $b_id . "', '" . $count ."')";            $query = "INSERT INTO Review VALUES ('". $count . "', '" . $review . "', '" . $rating ."')";
 
-            $run = mysqli_query($db, $query) or die(mysqli_error());
-            $run2 = mysqli_query($db, $query2) or die(mysqli_error());
+            $run = mysqli_query($db, $query);
+            $run2 = mysqli_query($db, $query2);
 
             if ($run && $run2 ) { echo "<script type='text/javascript'>alert('Review is added.');</script>"; }
             else  { echo "<script type='text/javascript'>alert('Review couldn't be added.');</script>"; }
