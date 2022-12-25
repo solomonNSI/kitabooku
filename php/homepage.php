@@ -11,7 +11,6 @@
         <title>Homepage</title>
     </head>
     <body>
-        <h1>Reviews</h1>
         <div>
             <!-- Sidebar -->
             <div style="float: left; width: 20%;">
@@ -19,6 +18,7 @@
                 <ul>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=feed">Feed</a></li>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=lists">Lists</a></li>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=allbooks">All Books</a></li>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=leaderboard">Leaderboard</a></li>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=buy">Buy e-books</a></li>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=forums">Forums</a></li>
@@ -37,6 +37,7 @@
                             //$userID = $_SESSION["userID"];
                             // Check connection
                             echo "<h1>Welcome to the Homepage</h1>";
+                            echo "<h3>Reviews/Quotes</h3>";
 
                             if (!$db) {
                                 die("Connection failed: " . mysqli_connect_error());
@@ -57,6 +58,7 @@
                             } else {
                                 echo "No reviews found.";
                             }
+
                         } elseif ($page == "lists") {
                             include "lists.php";
                         } elseif ($page == "leaderboard") {
@@ -67,6 +69,8 @@
                             include "forums.php";
                         } elseif ($page == "settings") {
                             include "settings.php";
+                        } elseif ($page == "allbooks") {
+                            include "allbooks.php";
                         }
                     }
                 ?>

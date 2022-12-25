@@ -1,5 +1,10 @@
 <?php
-    include('config.php');
+    require 'ConnectServer.class.php';
+    $db = ConnectServer::connect();
+    session_start();
+    if (!empty($_SESSION)) {
+        $username = $_SESSION['userID'];
+    }
 ?>
 
 <html>
