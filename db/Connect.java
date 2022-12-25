@@ -194,6 +194,15 @@ public class Connect{
             stmt.executeUpdate("INSERT INTO User VALUES ('shanab', 'ass@x.com', 'pass');");
             stmt.executeUpdate("INSERT INTO Reader VALUES ('shanab', '0', '0', 'Atas Fav Quote');");
 
+            stmt.executeUpdate("INSERT INTO User VALUES ('reader', 'r@x.com', 'pass');");
+            stmt.executeUpdate("INSERT INTO Reader VALUES ('reader', '0', '0', 'reader Fav Quote');");
+
+            stmt.executeUpdate("INSERT INTO User VALUES ('reader1', 'r1@x.com', 'pass');");
+            stmt.executeUpdate("INSERT INTO Reader VALUES ('reader1', '0', '0', 'reader Fav Quote');");
+
+            stmt.executeUpdate("INSERT INTO User VALUES ('reader2', 'r2@x.com', 'pass');");
+            stmt.executeUpdate("INSERT INTO Reader VALUES ('reader2', '0', '0', 'reader Fav Quote');");
+
             stmt.executeUpdate("INSERT INTO User VALUES ('sulo', 'sh@x.com', 'pass');");
             stmt.executeUpdate("INSERT INTO Reader VALUES ('sulo', '0', '0', 'Sulo Fav Quote');");
             stmt.executeUpdate("INSERT INTO AuthorUser VALUES ('sulo', '2002-07-19');");
@@ -253,6 +262,9 @@ public class Connect{
             stmt.executeUpdate("INSERT INTO read_book VALUES ('shanab', '10', '12/12/2022', '22/12/2022')");
             stmt.executeUpdate("INSERT INTO read_book VALUES ('shanab', '11', '12/12/2022', '22/12/2022')");
             stmt.executeUpdate("INSERT INTO read_book VALUES ('shanab', '9', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('reader', '1', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('reader1', '2', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('reader2', '3', '12/12/2022', '22/12/2022')");
 
 
 
