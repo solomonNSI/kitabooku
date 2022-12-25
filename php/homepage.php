@@ -20,9 +20,10 @@
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=lists">Lists</a></li>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=allbooks">All Books</a></li>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=leaderboard">Leaderboard</a></li>
-                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=buy">Buy e-books</a></li>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=buyebook">Buy e-books</a></li>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=forums">Forums</a></li>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=settings">Settings</a></li>
+                    <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=publishbook">Publish Book</a></li>
                 </ul>
             </div>
             <!-- Main content -->
@@ -63,14 +64,16 @@
                             include "lists.php";
                         } elseif ($page == "leaderboard") {
                             include "leaderboard.php";
-                        } elseif ($page == "buy") {
-                            include "buy.php";
+                        } elseif ($page == "buyebook") {
+                            include "e-book.php";
                         } elseif ($page == "forums") {
                             include "forums.php";
                         } elseif ($page == "settings") {
                             include "settings.php";
                         } elseif ($page == "allbooks") {
                             include "allbooks.php";
+                        } elseif ($page == "publishbook") {
+                            include "publishbook.php";
                         }
                     }
                 ?>
