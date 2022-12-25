@@ -1,6 +1,6 @@
 <?php
 
-$db = mysqli_connect('localhost:3306','root','root','cs353');
+$db = mysqli_connect('dijkstra.ug.bcc.bilkent.edu.tr','g.keskinkilic','iwliDXMQ','g_keskinkilic');
 
 if ($db->connect_error) {
     die("Connection failed: " . $db->connect_error);
