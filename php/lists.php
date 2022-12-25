@@ -4,6 +4,7 @@
 
 <html>
     <body>
+        <h1>Welcome to the Lists</h1>
         <form action ="" method="get">
             <label for="searchlists"> Search lists </label>
             <input type="text" name= "searchlists">
