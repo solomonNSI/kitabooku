@@ -99,7 +99,7 @@ public class Connect{
 
             stmt.executeUpdate(
                 "CREATE TABLE Review ("+
-                    "r_id INT NOT NULL,"+
+                    "r_id INT AUTO_INCREMENT,"+
                     "text VARCHAR(140) NOT NULL,"+
                     "rating INT(1) NOT NULL,"+
                     "PRIMARY KEY (r_id)"+
@@ -120,7 +120,7 @@ public class Connect{
                     "CREATE TABLE post(" +
                         "username    VARCHAR(255)," +
                         "r_id    INT," +
-                        "date VARCHAR(10) NOT NULL,"+
+                        "date DATE NOT NULL,"+
                         "PRIMARY KEY (username, r_id)," +
                         "FOREIGN KEY (username) REFERENCES Reader(username) ON DELETE CASCADE," +
                         "FOREIGN KEY (r_id) REFERENCES Review(r_id) ON DELETE CASCADE" +
@@ -131,8 +131,8 @@ public class Connect{
                     "CREATE TABLE read_book(" +
                         "username    VARCHAR(255)," +
                         "b_id    INT," +
-                        "start VARCHAR(10),"+
-                        "end VARCHAR(10),"+
+                        "s_date DATE,"+
+                        "e_date DATE,"+
                         "PRIMARY KEY (username, b_id)," +
                         "FOREIGN KEY (username) REFERENCES Reader(username) ON DELETE CASCADE," +
                         "FOREIGN KEY (b_id) REFERENCES Book(b_id) ON DELETE CASCADE" +
@@ -159,7 +159,7 @@ public class Connect{
 
             stmt.executeUpdate(
                 "CREATE TABLE Wallet ("+
-                    "w_id INT NOT NULL,"+
+                    "w_id INT AUTO_INCREMENT,"+
                     "balance INT NOT NULL,"+
                     "PRIMARY KEY (w_id)"+
                  ");"
@@ -241,30 +241,30 @@ public class Connect{
             
 
 
-            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '1', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '2', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '3', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '4', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '5', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '6', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '1', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '2', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '3', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '4', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '5', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO post VALUES ('gokiberk', '6', '2022-12-22')");
 
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '2', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '3', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '4', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '5', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '6', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '7', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '8', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('gokiberk', '1', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('gokiberk', '6', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('gokiberk', '7', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('gokiberk', '8', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('shanab', '10', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('shanab', '11', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('shanab', '9', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('reader', '1', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('reader1', '2', '12/12/2022', '22/12/2022')");
-            stmt.executeUpdate("INSERT INTO read_book VALUES ('reader2', '3', '12/12/2022', '22/12/2022')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '2', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '3', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '4', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '5', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '6', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '7', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('sulo', '8', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('gokiberk', '1', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('gokiberk', '6', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('gokiberk', '7', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('gokiberk', '8', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('shanab', '10', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('shanab', '11', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('shanab', '9', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('reader', '1', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('reader1', '2', '2022-12-22', '2022-12-22')");
+            stmt.executeUpdate("INSERT INTO read_book VALUES ('reader2', '3', '2022-12-22', '2022-12-22')");
 
 
 
@@ -277,8 +277,6 @@ public class Connect{
 
             stmt.executeUpdate("INSERT INTO publish VALUES ('sulo', '10', '22/12/2022')");
             stmt.executeUpdate("INSERT INTO purchase VALUES ('gokiberk', '10')");
-
-
             
             ResultSet rs = stmt.executeQuery("SELECT * FROM User;");
             try {
