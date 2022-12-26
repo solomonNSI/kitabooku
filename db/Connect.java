@@ -131,8 +131,8 @@ public class Connect{
                     "CREATE TABLE read_book(" +
                         "username    VARCHAR(255)," +
                         "b_id    INT," +
-                        "start_date DATE,"+
-                        "end_date DATE,"+
+                        "s_date DATE,"+
+                        "e_date DATE,"+
                         "PRIMARY KEY (username, b_id)," +
                         "FOREIGN KEY (username) REFERENCES Reader(username) ON DELETE CASCADE," +
                         "FOREIGN KEY (b_id) REFERENCES Book(b_id) ON DELETE CASCADE" +

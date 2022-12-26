@@ -12,21 +12,13 @@
     $password = $_POST['password'];
     $email = $_POST['email'];
 
-    $sql = "INSERT INTO User VALUES ('$username','$email', '$password')";
-    mysqli_query($db,$sql);
-    echo "$username";
+    $query = "INSERT INTO User VALUES ('$username','$email', '$password')";
+    // $query = "SELECT COUNT(*) AS count
+    //         FROM User
+    //         WHERE username = '$username' AND pwd = '$password'";
 
-    //wallet is auto incremented
-    $balance = "100";
-    $sql = "INSERT INTO Wallet (balance) 
-            VALUES ('$balance');";
-    // Execute the query
-    mysqli_query($db,$sql);
-    $last_wid = mysqli_insert_id($db);
-    echo "$last_wid";
-
-    $sql = "INSERT INTO has_wallet VALUES ('$username', '$last_wid')";
-    mysqli_query($db,$sql);
+    $result = $db->query($query) or die('Error in query: ' . $db->error);
+    echo "<div> heee" . $result . "</div>";
 
     session_start();
     $_SESSION['userID'] = $username; // pass the username as userID to the other pages
