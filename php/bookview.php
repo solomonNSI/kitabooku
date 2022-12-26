@@ -12,8 +12,8 @@ if (!empty($_SESSION)) {
 
 // TODO: fix this
 if (isset($_POST['mark-as-read-button'])) {
-    $query = "INSERT INTO read_book (username, b_id, start, end) 
-                    VALUES ('$username', '$b_id', '12/12/2022', '22/12/2022');";
+    $query = "INSERT INTO read_book (username, b_id, s_date, e_date) 
+                    VALUES ('$username', '$b_id', '2022-12-22', '2022-12-24');";
     $run = mysqli_query($db, $query);
 
     if ($run) {

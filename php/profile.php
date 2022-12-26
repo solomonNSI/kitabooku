@@ -15,13 +15,16 @@ $username = $_SESSION['userID'];
       $userData = mysqli_query($db, "SELECT * FROM Reader WHERE username ='" . $username. "'");
       $user = mysqli_fetch_array($userData);
       
-      echo "<div>" . $user['username'] . "</div>";
+      echo "<div> Username: " . $user['username'] . "</div>";
+      echo "<div> Fav Quote: " . $user['status'] . "</div>";
+      echo "<div> Book Goal: " . $user['book_goal'] . "</div>";
+      echo "<div> XP: " . $user['xp'] . "</div>";
+
+      $data = mysqli_query($db, "SELECT w.balance FROM Wallet w, has_wallet h WHERE h.username ='$username' AND w.w_id = h.w_id");
+      $b = mysqli_fetch_array($data);
+      echo "<div> Balance: " . $b['balance'] . "₺</div>";
     } else echo "<h1>Failed to connect to database...</h1>"
     ?>
-
-    <div id="reader-following">23 Following</div>
-    <div id="reader-rank">Rank: 1472</div>
-    <div id="reader-xp">4721 XP</div>
   </div>
   <div id="reader-view-ebooks">
 
