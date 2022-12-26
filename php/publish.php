@@ -16,7 +16,6 @@
     $page_count = $_POST["page_count"];
     $price = $_POST["price"];
     
-    
 
     // Use prepared statements to insert the data
     $sql = "INSERT INTO Book (title, author, publisher, publish_year, genre, page_count) 
@@ -29,9 +28,13 @@
             VALUES ('$last_id', '$price')";
     mysqli_query($db,$sql);
     echo '<script>alert("Book Published");';
+    // Redirect to the homepage
+    header("Location: homepage.php?page=ebook");
+    
+
+
 
     
 
-    // Redirect to the homepage
-    header("Location: homepage.php?page=ebook");
+
 ?>
