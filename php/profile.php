@@ -48,6 +48,19 @@ $username = $_SESSION['userID'];
         echo "<div>   Price: " . $row['price'] . "</div>";
         echo "<hr>";
       }
+      
+      $sql = "SELECT * 
+            FROM E_Book NATURAL JOIN Book
+            WHERE author = '$username'";
+      $bookData = mysqli_query($db, $sql);
+      echo "<h2 class='title'>Published E-Books </h2>";
+      while ($row = mysqli_fetch_array($bookData)) {
+        echo "<hr>";
+        echo "<a href='bookview.php?b_id=" . $row['b_id'] . "'> Title: " . $row['title'] . "</a>";
+        echo "<div> Author: " . $row['author'] . "</div>";
+        echo "<div>   Price: " . $row['price'] . "</div>";
+        echo "<hr>";
+      }
 /*       echo "<br>";
       $sql = "SELECT * 
             FROM Book b, read_book r 
