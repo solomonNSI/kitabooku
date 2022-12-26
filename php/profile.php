@@ -22,7 +22,7 @@ $username = $_SESSION['userID'];
 
       $data = mysqli_query($db, "SELECT w.balance FROM Wallet w, has_wallet h WHERE h.username ='$username' AND w.w_id = h.w_id");
       $b = mysqli_fetch_array($data);
-      echo "<div> Balance: " . $b['balance'] . "</div>";
+      echo "<div> Balance: " . $b['balance'] . "₺</div>";
     } else echo "<h1>Failed to connect to database...</h1>"
     ?>
   </div>
