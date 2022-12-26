@@ -37,7 +37,8 @@ $username = $_SESSION['userID'];
       echo "<br><p> Wallet Balance: " . $balance . "₺ </p><br>"; */
 
       $sql = "SELECT * 
-            FROM E_Book NATURAL JOIN Book NATURAL JOIN read_book NATURAL JOIN Reader";
+            FROM E_Book NATURAL JOIN Book NATURAL JOIN read_book NATURAL JOIN Reader 
+            WHERE username = '$username'";
       $bookData = mysqli_query($db, $sql);
       echo "<h2 class='title'>Previously read ebooks </h2>";
       while ($row = mysqli_fetch_array($bookData)) {
