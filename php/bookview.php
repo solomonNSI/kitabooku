@@ -61,6 +61,26 @@ if (isset($_POST['delete'])) {
         }
     }
 }
+
+
+if (isset($_POST['update'])) {
+    if (!empty($_POST['review']) && !empty($_POST['review']) && !empty($_POST['r_id'])) {
+        $review = $_POST['review'];
+        $rating = $_POST['rating'];
+
+        // prepare SQLs
+        $query = "UPDATE Review SET `text`= $review, rating = $rating WHERE Review.r_id={$_POST['r_id']}";
+        mysqli_query($db, $query);
+
+        $run = mysqli_query($db, $query);
+
+        if ($run) {
+            echo "<script type='text/javascript'>alert('Review is updated.');</script>";
+        } else {
+            echo "<script type='text/javascript'>alert('Review couldn't be updated.');</script>";
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
