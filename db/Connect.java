@@ -86,7 +86,7 @@ public class Connect{
 
             stmt.executeUpdate(
                 "CREATE TABLE Book("+
-                    "b_id INT NOT NULL,"+
+                    "b_id INT AUTO_INCREMENT,"+
                     "title VARCHAR(60) NOT NULL,"+
                     "author VARCHAR(100) NOT NULL,"+
                     "publisher VARCHAR(60) NOT NULL,"+

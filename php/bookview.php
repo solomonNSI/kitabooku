@@ -68,6 +68,7 @@ if (isset($_POST['submit'])) {
             if ($db) {
                 $bookData = mysqli_query($db, "SELECT * FROM Book WHERE b_id ='" . $b_id . "'");
                 $book = mysqli_fetch_array($bookData);
+                echo "<a href='homepage.php'>Back to Home Page</a>";
                 echo "<h1>" . $book['title'] . "</h1>";
                 echo "<h3>" . $book['author'] . "</h3>";
 

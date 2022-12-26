@@ -15,20 +15,23 @@
     $publisher = $_POST["publisher"];
     $page_count = $_POST["page_count"];
     $price = $_POST["price"];
-    $b_id = 115;
-
+    
+    
 
     // Use prepared statements to insert the data
-    $sql = "INSERT INTO Book (b_id, title, author, publisher, publish_year, genre, page_count) 
-                    VALUES ('$b_id', '$title', '$username', '$publisher', '$publish_year', '$genre', '$page_count');";
+    $sql = "INSERT INTO Book (title, author, publisher, publish_year, genre, page_count) 
+                    VALUES ('$title', '$username', '$publisher', '$publish_year', '$genre', '$page_count');";
     // Execute the query
-    $result = mysqli_query($db,$sql);
+    mysqli_query($db,$sql);
+    $last_id = mysqli_insert_id($db);
 
-    $sql = "INSERT INTO E_Book (b_id, price) 
-    VALUES ('$b_id', '$price')";
-    $result = mysqli_query($db,$sql);
+    $sql = "INSERT INTO E_Book (b_id, price)
+            VALUES ('$last_id', '$price')";
+    mysqli_query($db,$sql);
     echo '<script>alert("Book Published");';
 
+    
+
     // Redirect to the homepage
-    header("Location: e-book.php");
+    header("Location: homepage.php?page=ebook");
 ?>

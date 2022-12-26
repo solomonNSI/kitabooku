@@ -12,7 +12,7 @@
             <h4> Hey you - KITABOOKU!</h4>
                 <form class="form" method='post' action='sign.php'>
                 <input type='text' placeholder="Username" id='usernameInput' name='username' required>
-                <input type='text' placeholder="email" id='usernameInput' name='email' required>
+                <input type='text' placeholder="email" id='emailInput' name='email' required>
                 <input type='password' placeholder="Password" id='passwordInput' name='password' required>
                 <input type='password' placeholder="Confirm Password" id='temp' name='temp' required>
                 <button type='submit'>Login</button>

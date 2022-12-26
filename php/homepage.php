@@ -16,6 +16,8 @@
         <div>
             <!-- Sidebar -->
             <div style="float: left; width: 20%;">
+                <a href='homepage.php'>Back to Home Page</a>
+                <br> <a href='index.php'>Logout</a>
                 <h3>Discover</h3>
                 <ul>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=feed">Feed</a></li>

@@ -15,16 +15,18 @@
     $genre = $_POST["genre"];
     $publisher = $_POST["publisher"];
     $page_count = $_POST["page_count"];
-    $b_id = 135;
+    static $b_id = 100;
 
 
     // Use prepared statements to insert the data
-    $sql = "INSERT INTO Book (b_id, title, author, publisher, publish_year, genre, page_count) 
-                    VALUES ('$b_id', '$title', '$username', '$publisher', '$publish_year', '$genre', '$page_count');";
+    $sql = "INSERT INTO Book (title, author, publisher, publish_year, genre, page_count) 
+    VALUES ('$title', '$author', '$publisher', '$publish_year', '$genre', '$page_count');";
     // Execute the query
     $result = mysqli_query($db,$sql);
     echo '<script>alert("Book Published");';
+    $b_id++;
+
 
     // Redirect to the homepage
-    header("Location: allbooks.php");
+    header("Location: homepage.php?page=allbooks");
 ?>

@@ -63,7 +63,7 @@ if ($balance < $price) {
     $query = "UPDATE Wallet SET balance = $balance - $price WHERE w_id = $w_id";
     echo "$balance <br>";
     $result = $conn->query($query) or die('Error in query: ' . $conn->error);
-    echo "<script>alert('Bought book {$b_id} for {$price}TL succesfully.');";
+    echo "<script>alert('Bought book {$b_id} for {$price}TL succesfully. Current balance: {$newBalance}');";
     echo 'document.location = "homepage.php";</script>';
 }
 ?>
