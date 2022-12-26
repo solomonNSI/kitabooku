@@ -6,7 +6,6 @@ if (isset($_GET['b_id'])) {
     $b_id = $_GET['b_id'];
 }
 
-
 if (!empty($_SESSION)) {
     $username = $_SESSION['userID'];
 }
@@ -14,9 +13,7 @@ if (!empty($_SESSION)) {
 // TODO: fix this
 if (isset($_POST['mark-as-read-button'])) {
     $query = "INSERT INTO read_book (username, b_id, start, end) 
-                    VALUES ('$username', '$b_id', 'today', 'tomorrow');";
-
-
+                    VALUES ('$username', '$b_id', '12/12/2022', '22/12/2022');";
     $run = mysqli_query($db, $query);
 
     if ($run) {
@@ -39,7 +36,6 @@ if (isset($_POST['submit'])) {
         // prepare SQLs
         $query = "INSERT INTO Review VALUES ('" . $count . "', '" . $review . "', '" . $rating . "')";
         $query2 = "INSERT INTO has_review VALUES ('" . $b_id . "', '" . $count . "')";
-        $query = "INSERT INTO Review VALUES ('" . $count . "', '" . $review . "', '" . $rating . "')";
 
         $run = mysqli_query($db, $query);
         $run2 = mysqli_query($db, $query2);
@@ -48,6 +44,23 @@ if (isset($_POST['submit'])) {
             echo "<script type='text/javascript'>alert('Review is added.');</script>";
         } else {
             echo "<script type='text/javascript'>alert('Review couldn't be added.');</script>";
+        }
+    }
+}
+
+if (isset($_POST['delete'])) {
+    if (!empty($_POST['r_id'])) {
+        // prepare SQLs
+        $query = "DELETE FROM Review WHERE Review.r_id={$_POST['r_id']}";
+        $query2 = "DELETE FROM has_review WHERE has_review.r_id={$_POST['r_id']}";
+
+        $run = mysqli_query($db, $query);
+        $run2 = mysqli_query($db, $query2);
+
+        if ($run && $run2) {
+            echo "<script type='text/javascript'>alert('Review is deleted.');</script>";
+        } else {
+            echo "<script type='text/javascript'>alert('Review couldn't be deleted.');</script>";
         }
     }
 }
@@ -104,12 +117,10 @@ if (isset($_POST['submit'])) {
             }
             ?>
         </div>
-        <form method="post">
-            <div id="book-view-buttons" style="display: flex; margin: 10px;">
-                <button type="submit" name="mark-as-read-button">Mark As Read</button>
-                <button id="add-review-button">Add Review</button>
-                <button id="add-quote-button">Add Quote</button>
-            </div>
+        <form action="" method="post" style="display: flex; margin: 10px;">
+            <button type="submit" name="mark-as-read-button">Mark As Read</button>
+            <button id="add-review-button">Add Review</button>
+            <button id="add-quote-button">Add Quote</button>
         </form>
         <div id="book-about">
             <?php
@@ -130,7 +141,7 @@ if (isset($_POST['submit'])) {
             // Display reviews of the book
             if ($db) {
                 // Prepare the SQL query
-                $sql = "SELECT Review.text, Review.rating
+                $sql = "SELECT Review.text, Review.rating, Review.r_id
                                 FROM Book, Review, has_review
                                 WHERE Book.b_id = has_review.b_id  AND
                                     Review.r_id  = has_review.r_id AND
@@ -143,6 +154,16 @@ if (isset($_POST['submit'])) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<p> Review: " . $row['text'] . "</p>";
                         echo "<p> Rating: " . $row['rating'] . "</p>";
+
+                        ?>
+                        <td class="contact-delete">
+                            <form action="" method="post">
+                                <input type="hidden" name="r_id" value="<?php echo $row['r_id']; ?>">
+                                <input type="submit" name="delete" value="Delete"><br>
+                            </form>
+                        </td>
+                        <?php
+
                         echo "<hr>";
                     }
                 } else {
