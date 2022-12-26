@@ -24,9 +24,14 @@ if (isset($_POST['mark-as-read-button'])) {
 }
 
 if (isset($_POST['submit'])) {
-    if (!empty($_POST['review']) && !empty($_POST['review'])) {
+    if (!empty($_POST['review']) && !empty($_POST['rating']) && !($_POST['rating'] > 5 or  $_POST['rating'] < 0 ) ) {
         $review = $_POST['review'];
         $rating = $_POST['rating'];
+
+        $valid = true;
+        if($rating > 5){
+            $valid = false;
+        }
 
         // prepare SQLs
         $query = "INSERT INTO Review (`text`, rating) VALUES ('$review', '$rating');";
@@ -42,6 +47,9 @@ if (isset($_POST['submit'])) {
         } else {
             echo "<script type='text/javascript'>alert('Review couldn't be added.');</script>";
         }
+    }
+    else if($_POST['rating'] > 5 or  $_POST['rating'] < 0){
+        echo "<script type='text/javascript'>alert('Rating should be between 0-5.');</script>";
     }
 }
 

@@ -35,12 +35,23 @@ $username = $_SESSION['userID'];
       $data = $result->fetch_assoc();
       $balance = $data['balance'];
       echo "<br><p> Wallet Balance: " . $balance . "₺ </p><br>"; */
+      $sql = "SELECT * 
+            FROM Book NATURAL JOIN read_book NATURAL JOIN User 
+            WHERE username = '$username'";
+      $bookData = mysqli_query($db, $sql);
+      echo "<h2 class='title'>All the books you read</h2>";
+      while ($row = mysqli_fetch_array($bookData)) {
+        echo "<hr>";
+        echo "<a href='bookview.php?b_id=" . $row['b_id'] . "'> Title: " . $row['title'] . "</a>";
+        echo "<div> Author: " . $row['author'] . "</div>";
+        echo "<hr>";
+      }
 
       $sql = "SELECT * 
             FROM E_Book NATURAL JOIN Book NATURAL JOIN read_book NATURAL JOIN User 
             WHERE username = '$username'";
       $bookData = mysqli_query($db, $sql);
-      echo "<h2 class='title'>Previously read ebooks </h2>";
+      echo "<h2 class='title'>E-Books you read</h2>";
       while ($row = mysqli_fetch_array($bookData)) {
         echo "<hr>";
         echo "<a href='bookview.php?b_id=" . $row['b_id'] . "'> Title: " . $row['title'] . "</a>";
