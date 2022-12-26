@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -30,7 +29,6 @@
 </head>
 
 <body>
-
     <table>
         <tr>
             <th>Book Title</th>
@@ -43,31 +41,58 @@
         if (!$db) {
             die("Connection failed: " . mysqli_connect_error());
         }
-        // Prepare the SQL query
-        $sql = "SELECT * FROM Book";
-        // Execute the query
-        $result = mysqli_query($db, $sql);
+        if (isset($_POST["filter"])) {
 
-        // Check if the query was successful
-        if (mysqli_num_rows($result) > 0) {
-            echo "<h4> Total num of books: " . mysqli_num_rows($result) . "</h4>";
-            // Output the data
-            while ($row = mysqli_fetch_assoc($result)) {
-                // Create a clickable link using the title as the anchor text
-                // Pass the title as a parameter in the URL using the "title" query string variable
-                echo "<tr><td><a href='bookview.php?b_id=" . $row['b_id'] . "'>" . $row['title'] . "</a></td><td>" . $row['author'] .  "</td></tr>";
-                //echo "<tr><td>" . $place . "</td><td><a href='user.php?username=" . $row['username'] . "'>" . $row['username'] . "</a></td><td>" . $row['num_books'] . "</td></tr>";
+            session_start();
+            require 'ConnectServer.class.php';
+            $db = ConnectServer::connect();
+            $value = $_POST["filter"];
+            echo "<h4> Some weird php error that we couldn't solve, but your input was: " . $value . "</h4>";
+            $sql = "SELECT * FROM Book
+                        WHERE title LIKE '%" . $value . "%'";
 
+            echo $sql;
+            $result = $db->query($sql) or die('<script>alert("Account already exists");');
+            if (mysqli_num_rows($result) > 0) {
+                echo "<h4> Found: " . mysqli_num_rows($result) . " books </h4>";
+                while ($row = mysqli_fetch_array($result)) {
+                    echo "<tr><td><a href='bookview.php?b_id=" . $row['b_id'] . "'>" . $row['title'] . "</a></td><td>" . $row['author'] .  "</td></tr>";
+                }
+            } else {
+                echo "<tr><td>Nothing Found</td></tr>";
             }
         } else {
-            echo "No reviews found.";
+            // Prepare the SQL query
+            $sql = "SELECT * FROM Book";
+            // Execute the query
+            $result = mysqli_query($db, $sql);
+
+            // Check if the query was successful
+            if (mysqli_num_rows($result) > 0) {
+                // Output the data
+                while ($row = mysqli_fetch_assoc($result)) {
+                    // Create a clickable link using the title as the anchor text
+                    // Pass the title as a parameter in the URL using the "title" query string variable
+                    echo "<tr><td><a href='bookview.php?b_id=" . $row['b_id'] . "'>" . $row['title'] . "</a></td><td>" . $row['author'] . "</td></tr>";
+                }
+            } else {
+                echo "No reviews found.";
+            }
         }
         ?>
     </table>
 </body>
-<h1> Couldn't find your book?</h1>
+<div id='applyfilter'>
+    <h1>Apply a filter! </h1>
+    <form class="form" method='post' action='e-book.php'>
+        <label for="filter"> Search for the name (ex. first two letters) </label>
+        <input type="text" name="filter" id="filter"> <br>
+        <button type="submit">Search!</button>
+    </form>
+</div id='applyfilter'>
+<h1> Couldn't find a book?</h1>
 <div id='addbook'>
-    <h1 class="title">Publish a Book</h1>
+    <h2 class="title">Add it yourself!</h2>
     <form class="form" method='post' onsubmit='return validateForm();' action='addbook.php'>
         <label for="title">Title:</label><br>
         <input type="text" name="title" id="title"><br>
