@@ -18,6 +18,9 @@
             <div style="float: left; width: 20%;">
                 <a href='homepage.php'>Back to Home Page</a>
                 <br> <a href='index.php'>Logout</a>
+                <?php
+                    echo "<h4>". $username . " </h4>";
+                ?>
                 <h3>Discover</h3>
                 <ul>
                     <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=feed">Feed</a></li>

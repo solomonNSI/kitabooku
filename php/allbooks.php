@@ -30,6 +30,7 @@
 </head>
 
 <body>
+
     <table>
         <tr>
             <th>Book Title</th>
@@ -49,6 +50,7 @@
 
         // Check if the query was successful
         if (mysqli_num_rows($result) > 0) {
+            echo "<h4> Total num of books: " . mysqli_num_rows($result) . "</h4>";
             // Output the data
             while ($row = mysqli_fetch_assoc($result)) {
                 // Create a clickable link using the title as the anchor text

@@ -11,6 +11,8 @@
     $username = $_POST['username'];
     $password = $_POST['password'];
     $email = $_POST['email'];
+    $quote = $_POST['quote'];
+
 
     $query = "SELECT COUNT(*) AS count
                 FROM User
@@ -26,6 +28,10 @@
     } else {
         $query = "INSERT INTO User VALUES ('$username','$email', '$password')";
         $result = $db->query($query) or die('Error in query: ' . $db->error);
+        
+        $query = "INSERT INTO Reader VALUES ('$username','0', '0', '$quote')";
+        $result = $db->query($query) or die('Error in query: ' . $db->error);
+        
         echo "<div> heee" . $result . "</div>";
         session_start();
         $_SESSION['userID'] = $username; // pass the username as userID to the other pages
