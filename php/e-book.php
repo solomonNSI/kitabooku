@@ -42,7 +42,7 @@
             require 'ConnectServer.class.php';
             $db = ConnectServer::connect();
             $value = $_POST["filter"];
-            echo "<h4> Some weird php error that we couldn't solve, but your input was: " . $value . "</h4>";
+            echo "<h4> Your search input was: " . $value . "</h4>";
             $sql = "SELECT * FROM Book
                         WHERE title LIKE '%" . $value . "%'";
 
