@@ -32,6 +32,14 @@
         $query = "INSERT INTO Reader VALUES ('$username','0', '0', '$quote')";
         $result = $db->query($query) or die('Error in query: ' . $db->error);
         
+        $query2 = "INSERT INTO Wallet (balance) VALUES ('1000')";
+        // Execute the query
+        mysqli_query($db,$query2);
+        $last_wid = mysqli_insert_id($db);
+
+        $sql = "INSERT INTO has_wallet VALUES ('$username', '$last_wid')";
+        mysqli_query($db,$sql);
+
         echo "<div> heee" . $result . "</div>";
         session_start();
         $_SESSION['userID'] = $username; // pass the username as userID to the other pages

@@ -101,9 +101,17 @@
                             echo "<p> hey " . $username . "! You can buy your favorite ebooks from here...</p";
                             echo "<p></p>";
                             $result = mysqli_query($db, $sql);
+                            $sql2 = "SELECT balance FROM has_wallet NATURAL JOIN Wallet NATURAL JOIN Reader WHERE username = '$username'";
+                            $result2 = mysqli_query($db, $sql2);
+                            // Check if the query was successful
+                            if (mysqli_num_rows($result2) > 0) {
+                                while ($row = mysqli_fetch_array($result2)) {
+                                    echo "<h3> Your balance: " . $row['balance'] . " </h3>";
+                                } 
+                            } else {
+                                echo "nope";
+                            }
 
-                            
-                            
                             // Check if the query was successful
                             if (mysqli_num_rows($result) > 0) {
                                 // Output the data
