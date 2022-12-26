@@ -15,7 +15,9 @@ $username = $_SESSION['userID'];
       $userData = mysqli_query($db, "SELECT * FROM Reader WHERE username ='" . $username. "'");
       $user = mysqli_fetch_array($userData);
       
-      echo "<div>" . $user['username'] . "</div>";
+      echo "<div> Username: " . $user['username'] . "</div>";
+      echo "<div> Fav Quote: " . $user['status'] . "</div>";
+      echo "<div> Book Goal: " . $user['book_goal'] . "</div>";
     } else echo "<h1>Failed to connect to database...</h1>"
     ?>
 
