@@ -28,19 +28,16 @@ if (isset($_POST['submit'])) {
         $review = $_POST['review'];
         $rating = $_POST['rating'];
 
-        // put total review count + 1 as r_id
-        $totalReviewCount = mysqli_query($db, "SELECT COUNT(*) as count FROM Review");
-        $temp = mysqli_fetch_array($totalReviewCount);
-        $count = $temp['count'] + 1;
-
         // prepare SQLs
-        $query = "INSERT INTO Review VALUES ('" . $count . "', '" . $review . "', '" . $rating . "')";
-        $query2 = "INSERT INTO has_review VALUES ('" . $b_id . "', '" . $count . "')";
+        $query = "INSERT INTO Review (`text`, rating) VALUES ('$review', '$rating');";
+        mysqli_query($db, $query);
+        $last_id = mysqli_insert_id($db);
 
+
+        $query = "INSERT INTO has_review VALUES ('$b_id', '$last_id');"; // count = r_id
         $run = mysqli_query($db, $query);
-        $run2 = mysqli_query($db, $query2);
 
-        if ($run && $run2) {
+        if ($run) {
             echo "<script type='text/javascript'>alert('Review is added.');</script>";
         } else {
             echo "<script type='text/javascript'>alert('Review couldn't be added.');</script>";
@@ -117,11 +114,14 @@ if (isset($_POST['delete'])) {
             }
             ?>
         </div>
-        <form action="" method="post" style="display: flex; margin: 10px;">
-            <button type="submit" name="mark-as-read-button">Mark As Read</button>
+        <div  style="display: flex; margin: 10px;">
+            <form action="" method="post">
+                <button type="submit" name="mark-as-read-button">Mark As Read</button>
+            </form>
             <button id="add-review-button">Add Review</button>
             <button id="add-quote-button">Add Quote</button>
-        </form>
+        </div>
+
         <div id="book-about">
             <?php
             if ($db) {
