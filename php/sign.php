@@ -12,23 +12,23 @@
     $password = $_POST['password'];
     $email = $_POST['email'];
 
-    $query = "INSERT INTO User VALUES ('$username','$email', '$password')";
-    // $query = "SELECT COUNT(*) AS count
-    //         FROM User
-    //         WHERE username = '$username' AND pwd = '$password'";
+    $query = "SELECT COUNT(*) AS count
+                FROM User
+                WHERE username = '$username' 
+                AND pwd = '$password'";
 
     $result = $db->query($query) or die('Error in query: ' . $db->error);
-    echo "<div> heee" . $result . "</div>";
+    $data = $result->fetch_assoc();
 
-    session_start();
-    $_SESSION['userID'] = $username; // pass the username as userID to the other pages
-    header('Location: homepage.php');
-    // if ($data['count'] > 0) {
-    //     session_start();
-    //     $_SESSION['userID'] = $username; // pass the username as userID to the other pages
-    //     header('Location: homepage.php');
-    // } else {
-    //     echo '<script>alert("Login failed, wrong credentials.");';
-    //     echo 'document.location = "index.php";</script>';
-    // }
+    if ($data['count'] > 0) {
+        echo '<script>alert("Account already exists");';
+        echo 'document.location = "index.php";</script>';
+    } else {
+        $query = "INSERT INTO User VALUES ('$username','$email', '$password')";
+        $result = $db->query($query) or die('Error in query: ' . $db->error);
+        echo "<div> heee" . $result . "</div>";
+        session_start();
+        $_SESSION['userID'] = $username; // pass the username as userID to the other pages
+        header('Location: homepage.php');
+    }
 ?>
